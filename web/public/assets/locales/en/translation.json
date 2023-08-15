@@ -1,0 +1,19 @@
+{
+  "app_title": "Family tree",
+  "language": "English",
+  "welcome_message": "Welcome, this is our family tree",
+  "days_since_last_release": "This app was last updated {{number_of_days}} days ago",
+  "landing_title": {
+    "main_title": "roots",
+    "subtitle": "our"
+  },
+  "menu": {
+    "tree": "thi is us",
+    "locations": "locations",
+    "gallery": "gallery",
+    "auth": "login"
+  },
+  "buttons": {
+    "button_landing_start": "start here"
+  }
+}

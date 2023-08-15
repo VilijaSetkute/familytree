@@ -1,0 +1,19 @@
+{
+  "app_title": "Genealoginis medis",
+  "language": "Lietuvių",
+  "welcome_message": "Sveiki, čia yra mūsų šaknys ",
+  "days_since_last_release": "Svetainė buvo atnaujinta prieš {{number_of_days}} dienų",
+  "landing_title": {
+    "main_title": "šaknys",
+    "subtitle": "mūsų"
+  },
+  "menu": {
+    "tree": "mes",
+    "locations": "vietos",
+    "gallery": "galerija",
+    "auth": "prisijungti"
+  },
+  "buttons": {
+    "button_landing_start": "pradėti"
+  }
+}
