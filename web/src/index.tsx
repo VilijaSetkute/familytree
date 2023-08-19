@@ -10,7 +10,7 @@ import App from './App';
 import { Box } from '@mui/material';
 
 i18n
-  .use(initReactI18next) // passes i18n down to react-i18next
+  .use(initReactI18next)
   .use(LanguageDetector)
   .use(HttpApi)
   .init({
@@ -23,18 +23,7 @@ i18n
     backend: { loadPath: '/assets/locales/{{lng}}/translation.json' },
   });
 
-const loadingMarkup = (
-  <Box
-    sx={{
-      height: '100vh',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-  >
-    Loading..
-  </Box>
-);
+const loadingMarkup = <Box className="loading-app">...</Box>;
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
