@@ -10,7 +10,7 @@ const Menu = () => {
   return (
     <>
       <Box
-        sx={{ width: '900px', marginX: 'auto' }}
+        sx={{ maxWidth: '900px', marginX: 'auto' }}
         display="flex"
         justifyContent="space-between"
         alignItems="center"
