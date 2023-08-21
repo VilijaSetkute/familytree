@@ -8,6 +8,7 @@ import HttpApi from 'i18next-http-backend';
 import './index.css';
 import App from './App';
 import { Box } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
 
 i18n
   .use(initReactI18next)
@@ -31,7 +32,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <Suspense fallback={loadingMarkup}>
     <React.StrictMode>
-      <App />
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
     </React.StrictMode>
   </Suspense>
 );
