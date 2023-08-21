@@ -8,7 +8,13 @@ interface StylesProps {
 }
 
 export const styles: StylesProps = {
-  landingTitle: { fontSize: 'min(calc(8vw + 40px), 180px)', fontWeight: 800 },
+  landingTitle: {
+    fontSize: 'min(calc(8vw + 40px), 180px)',
+    fontWeight: 800,
+    '@media (max-width: 700px)': {
+      fontSize: 'min(calc(8vw + 30px), 180px)',
+    },
+  },
   landingSubtitle: {
     fontSize: 'min(calc(8vw), 75px)',
     fontWeight: 300,
