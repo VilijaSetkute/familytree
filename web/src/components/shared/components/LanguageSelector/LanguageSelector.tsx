@@ -29,9 +29,9 @@ const LanguageSelector = () => {
       <Box position="relative">
         <Box display="flex" alignItems="center">
           <Box
+            sx={{ cursor: 'pointer' }}
             component="div"
             className={`flag-icon ${flag}`}
-            marginRight={2}
             onClick={() => setIsOpen(!isOpen)}
           />
         </Box>
