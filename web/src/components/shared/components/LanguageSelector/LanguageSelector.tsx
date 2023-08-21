@@ -3,35 +3,46 @@ import i18next from 'i18next';
 import 'flag-icon-css/css/flag-icons.min.css';
 import { Box } from '@mui/material';
 import { ClickAwayListener } from '@mui/base';
-import { AbsoluteContainer, LanguageIcon, LanguageItem } from './styles';
+import { LanguageItem } from './styles';
 import { languageOptions, getLangugageCookie } from './model';
 
 const LanguageSelector = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentCookie, setCurrentCookie] = useState<string>('');
+  const [flag, setFlag] = useState<string>('');
 
-  const handlelanguage = (language: string) => {
+  const handlelanguage = (language: string, flag: string) => {
     i18next.changeLanguage(language);
     setIsOpen(!isOpen);
+    setCurrentCookie(language);
+    setFlag(flag);
   };
 
   useEffect(() => {
     const cookie = getLangugageCookie();
     setCurrentCookie(cookie);
+    setFlag(`flag-icon-${cookie === 'en' ? 'gb' : 'lt'}`);
   }, [isOpen]);
 
   return (
     <ClickAwayListener onClickAway={() => setIsOpen(false)}>
-      <AbsoluteContainer>
-        <LanguageIcon onClick={() => setIsOpen(!isOpen)} />
+      <Box position="relative">
+        <Box display="flex" alignItems="center">
+          <Box
+            component="div"
+            className={`flag-icon ${flag}`}
+            marginRight={2}
+            onClick={() => setIsOpen(!isOpen)}
+          />
+        </Box>
         {isOpen && (
-          <Box>
+          <Box position="absolute" width="130px" marginTop={1}>
             {languageOptions.map(({ value, label, country_code, flag }) => (
               <LanguageItem
                 key={country_code}
                 isSelected={currentCookie === value}
                 onClick={() =>
-                  currentCookie === value ? null : handlelanguage(value)
+                  currentCookie === value ? null : handlelanguage(value, flag)
                 }
               >
                 <Box
@@ -44,7 +55,7 @@ const LanguageSelector = () => {
             ))}
           </Box>
         )}
-      </AbsoluteContainer>
+      </Box>
     </ClickAwayListener>
   );
 };

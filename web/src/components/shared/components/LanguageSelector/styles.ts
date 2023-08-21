@@ -1,18 +1,11 @@
 import styled from '@emotion/styled';
 import { Language } from '@mui/icons-material';
 import { Box } from '@mui/material';
-
-export const AbsoluteContainer = styled(Box)({
-  position: 'absolute',
-  top: 0,
-  right: 0,
-  textAlign: 'end',
-  margin: '16px',
-});
+import { colors } from '../../../../config/theme/theme';
 
 export const LanguageIcon = styled(Language)({
-  color: '#fff',
-  fontSize: 'min(10vw, 40px)',
+  color: colors.white,
+  fontSize: '32px',
   cursor: 'pointer',
 });
 

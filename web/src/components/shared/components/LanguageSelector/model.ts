@@ -24,7 +24,8 @@ export const getLangugageCookie = () => {
   const cookieString = document.cookie;
   const cookies = cookieString.split(';');
   const currentCookie = cookies
-    .find((cookie) => cookie.startsWith('i18next'))
-    ?.split('=')[1];
+    .filter((cookie) => cookie.includes('i18next'))[0]
+    .trim()
+    .split('=')[1];
   return currentCookie || '';
 };
