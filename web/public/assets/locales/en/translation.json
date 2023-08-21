@@ -8,10 +8,13 @@
     "subtitle": "our"
   },
   "menu": {
-    "tree": "thi is us",
+    "home": "home",
+    "tree": "this is us",
     "locations": "locations",
-    "gallery": "gallery",
-    "auth": "login"
+    "gallery": "gallery"
+  },
+  "authorization": {
+    "menu_auth": "login"
   },
   "buttons": {
     "button_landing_start": "start here"

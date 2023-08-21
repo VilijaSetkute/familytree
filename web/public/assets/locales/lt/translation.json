@@ -8,10 +8,13 @@
     "subtitle": "mūsų"
   },
   "menu": {
+    "home": "pagrindinis",
     "tree": "mes",
     "locations": "vietos",
-    "gallery": "galerija",
-    "auth": "prisijungti"
+    "gallery": "galerija"
+  },
+  "authorization": {
+    "menu_auth": "prisijungti"
   },
   "buttons": {
     "button_landing_start": "pradėti"
