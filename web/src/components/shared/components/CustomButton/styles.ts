@@ -36,6 +36,11 @@ export const ButtonContainer = styled(Button)<{ colorVariant: ColorVariant }>(
     padding: '8px 40px',
     borderRadius: '100px',
     background: getButtonColor(colorVariant),
+    filter: 'drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.75))',
+    transition: 'all 0.1s ease',
+    '&:hover': {
+      filter: `drop-shadow(0px 0px 3px ${colors.primaryGreen.greenVibrant})`,
+    },
   })
 );
 

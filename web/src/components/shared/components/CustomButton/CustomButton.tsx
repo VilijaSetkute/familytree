@@ -1,6 +1,4 @@
 import React from 'react';
-// import './styles';
-// import { colors } from '../../../../config/theme/theme';
 import { ButtonContainer, ButtonText } from './styles';
 import { ColorVariant } from './model';
 
@@ -11,7 +9,11 @@ interface ButtonProps {
 
 const CustomButton: React.FC<ButtonProps> = ({ text, color }) => {
   return (
-    <ButtonContainer colorVariant={color}>
+    <ButtonContainer
+      disableRipple
+      colorVariant={color}
+      className="button-hover"
+    >
       <ButtonText colorVariant={color}>{text}</ButtonText>
     </ButtonContainer>
   );
