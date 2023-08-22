@@ -14,7 +14,14 @@
     "gallery": "gallery"
   },
   "authorization": {
-    "menu_auth": "login"
+    "menu_auth": "login",
+    "login_divider": "or",
+    "login_title": "login",
+    "login_button": "login",
+    "input_user_placeholder": "email",
+    "input_password_placeholder": "password",
+    "input_password_repeat_placeholder": "repeat password",
+    "register_button": "create account"
   },
   "buttons": {
     "button_landing_start": "start here"

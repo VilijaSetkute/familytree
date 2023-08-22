@@ -14,7 +14,14 @@
     "gallery": "galerija"
   },
   "authorization": {
-    "menu_auth": "prisijungti"
+    "menu_auth": "prisijungti",
+    "login_divider": "arba",
+    "login_title": "prisijunkite",
+    "login_button": "jungtis",
+    "input_user_placeholder": "el. paštas",
+    "input_password_placeholder": "slaptažodis",
+    "input_password_repeat_placeholder": "pakartokite slaptažodį",
+    "register_button": "kurti paskyrą"
   },
   "buttons": {
     "button_landing_start": "pradėti"
