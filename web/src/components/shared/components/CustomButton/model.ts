@@ -1,1 +1,3 @@
-export type ColorVariant = 'gradient' | 'light' | 'accent';
+export type ColorVariant = 'gradient' | 'accent' | 'light' | 'pale';
+
+export type WidthVariant = 'full' | 'content';
