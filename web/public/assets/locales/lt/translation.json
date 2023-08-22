@@ -25,5 +25,9 @@
   },
   "buttons": {
     "button_landing_start": "pradėti"
+  },
+  "page_no_content": {
+    "text_main": "Atsiprašome, bet toks puslapis neegzistuoja",
+    "text_instruction": "Pasirinkite norimą puslapį arba spauskite naršyklėje mygtuką \"Atgal\" (\"Back\")"
   }
 }

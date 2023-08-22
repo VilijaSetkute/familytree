@@ -1,7 +1,21 @@
+import { Typography } from '@mui/material';
 import React from 'react';
+import { CenteredContainer } from './styles';
+import { useTranslation, Trans } from 'react-i18next';
 
 const NoContentPage = () => {
-  return <div>NoContentPage</div>;
+  const { t } = useTranslation();
+  return (
+    <CenteredContainer>
+      <Typography color="white" variant="h4">
+        {t('page_no_content.text_main')}
+      </Typography>
+      <Typography color="white">
+        {/* {t('page_no_content.text_instruction')} */}
+        <Trans i18nKey="page_no_content.text_instruction" />
+      </Typography>
+    </CenteredContainer>
+  );
 };
 
 export default NoContentPage;

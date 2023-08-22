@@ -25,5 +25,9 @@
   },
   "buttons": {
     "button_landing_start": "start here"
+  },
+  "page_no_content": {
+    "text_main": "Sorry, but such page doesn't exist",
+    "text_instruction": "Navigate to desired page or click \"Back\""
   }
 }
