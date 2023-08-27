@@ -18,6 +18,7 @@
     "login_divider": "arba",
     "login_title": "prisijunkite",
     "login_button": "jungtis",
+    "input_userName_placeholder": "vartotojo vardas",
     "input_user_placeholder": "el. paštas",
     "input_password_placeholder": "slaptažodis",
     "input_password_repeat_placeholder": "pakartokite slaptažodį",

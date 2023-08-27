@@ -18,6 +18,7 @@
     "login_divider": "or",
     "login_title": "login",
     "login_button": "login",
+    "input_userName_placeholder": "user name",
     "input_user_placeholder": "email",
     "input_password_placeholder": "password",
     "input_password_repeat_placeholder": "repeat password",
