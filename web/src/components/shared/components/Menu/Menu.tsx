@@ -1,4 +1,5 @@
 import { Box, ClickAwayListener } from '@mui/material';
+import { Notifications } from '@mui/icons-material';
 import React, { useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../../../../assets/icons/Logo_icon.svg';
 import { useTranslation } from 'react-i18next';
@@ -20,6 +21,11 @@ const Menu = () => {
     window.innerWidth >= 700
   );
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [isAuthorized] = useState<boolean>(false);
+  const [profile] = useState({
+    userName: 'Vilija',
+    email: 'vilija.setkute@gmail.com',
+  });
 
   const updateScreenWidth = () => {
     const width = window.innerWidth;
@@ -73,11 +79,26 @@ const Menu = () => {
                 </Box>
 
                 <Box display="flex" alignItems="center">
-                  <Link to="/paskyra/prisijungti">
-                    <MenuAuthButton disableRipple>
-                      {t('authorization.menu_auth')}
-                    </MenuAuthButton>
-                  </Link>
+                  {isAuthorized ? (
+                    <Box
+                      display="flex"
+                      justifyItems="space-between"
+                      alignItems="center"
+                    >
+                      <Box marginRight="8px" sx={{ color: 'white' }}>
+                        <Notifications sx={{ fill: 'white' }} />
+                      </Box>
+                      <Box marginRight="16px" sx={{ color: 'white' }}>
+                        {profile.userName}
+                      </Box>
+                    </Box>
+                  ) : (
+                    <Link to="/paskyra/prisijungti">
+                      <MenuAuthButton disableRipple>
+                        {t('authorization.menu_auth')}
+                      </MenuAuthButton>
+                    </Link>
+                  )}
                   <LanguageSelector />
                   <MenuExpandIcon onClick={() => setIsMenuVisible(true)} />
                 </Box>

@@ -1,8 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { MenuNavButton, styles } from './styles';
-import { ReactComponent as LeafIcon } from '../../../../assets/icons/leaf_icon.svg';
-import { ReactComponent as LeafIconLeft } from '../../../../assets/icons/leaf_icon_left.svg';
 
 interface NavButtonProps {
   to: string;
@@ -15,7 +13,6 @@ const StyledNavButton: React.FC<NavButtonProps> = ({ to, text, onClose }) => {
     <NavLink to={to} style={styles.navLinkPositioning} onClick={onClose}>
       {({ isActive }) => (
         <>
-          {isActive ? <LeafIconLeft width={40} /> : undefined}
           <MenuNavButton
             isactive={`${isActive}`}
             disableRipple
@@ -23,7 +20,6 @@ const StyledNavButton: React.FC<NavButtonProps> = ({ to, text, onClose }) => {
           >
             {text}
           </MenuNavButton>
-          {isActive ? <LeafIcon width={40} /> : undefined}
         </>
       )}
     </NavLink>

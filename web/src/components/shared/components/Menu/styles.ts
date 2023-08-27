@@ -53,6 +53,7 @@ export const MenuListContainer = styled(Box)<{ visiblemenu: string }>(
 export const MenuNavButton = styled(Button)<{
   isactive: string;
 }>(({ isactive }) => ({
+  fontFamily: 'Karla, sans-serif',
   color: colors.white,
   fontSize: '16px',
   fontWeight: isactive === 'true' ? 600 : 300,
@@ -60,7 +61,7 @@ export const MenuNavButton = styled(Button)<{
   maxWidth: 'fit-content',
   textDecoration: 'none',
   boxSizing: 'border-box',
-  borderBottom: `1px solid ${
+  borderBottom: `2px solid ${
     isactive === 'true' ? colors.primaryGreen.greenLight : 'transparent'
   }`,
   borderRadius: 0,

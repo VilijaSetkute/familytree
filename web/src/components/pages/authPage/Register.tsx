@@ -26,6 +26,15 @@ const Register = () => {
         </Box>
         <Box mb={3}>
           <InputField
+            placeholder={t('authorization.input_userName_placeholder')}
+            type="text"
+            endAdornment={
+              <InputAdornment position="start">
+                <AccountCircle sx={styles.inputIcon} />
+              </InputAdornment>
+            }
+          />
+          <InputField
             placeholder={t('authorization.input_user_placeholder')}
             type="text"
             endAdornment={
