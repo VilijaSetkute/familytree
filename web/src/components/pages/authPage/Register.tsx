@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Box, IconButton, InputAdornment } from '@mui/material';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../../shared/components/CustomButton/CustomButton';
-import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/icons/Logo_icon.svg';
+import { useRegister } from './hooks/useRegister';
+import SnackbarChip from '../../shared/components/Snackbar';
 
 const Register = () => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { handleSubmit, handleOnChange, error } = useRegister();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -18,6 +20,7 @@ const Register = () => {
   ) => {
     event.preventDefault();
   };
+
   return (
     <CenteredContainer>
       <AuthCard>
@@ -26,6 +29,7 @@ const Register = () => {
         </Box>
         <Box mb={3}>
           <InputField
+            name="username"
             placeholder={t('authorization.input_userName_placeholder')}
             type="text"
             endAdornment={
@@ -33,8 +37,10 @@ const Register = () => {
                 <AccountCircle sx={styles.inputIcon} />
               </InputAdornment>
             }
+            onChange={handleOnChange}
           />
           <InputField
+            name="email"
             placeholder={t('authorization.input_user_placeholder')}
             type="text"
             endAdornment={
@@ -42,8 +48,10 @@ const Register = () => {
                 <AccountCircle sx={styles.inputIcon} />
               </InputAdornment>
             }
+            onChange={handleOnChange}
           />
           <InputField
+            name="password"
             placeholder={t('authorization.input_password_placeholder')}
             type={showPassword ? 'text' : 'password'}
             endAdornment={
@@ -62,6 +70,7 @@ const Register = () => {
                 </IconButton>
               </InputAdornment>
             }
+            onChange={handleOnChange}
           />
           <InputField
             placeholder={t('authorization.input_password_repeat_placeholder')}
@@ -82,17 +91,18 @@ const Register = () => {
                 </IconButton>
               </InputAdornment>
             }
+            // onChange={handleOnChange}
           />
         </Box>
-        <Link to="/pagrindinis">
-          <CustomButton
-            text={t('authorization.register_button')}
-            color="light"
-            shadowSize={5}
-            width="full"
-          />
-        </Link>
+        <CustomButton
+          text={t('authorization.register_button')}
+          color="light"
+          shadowSize={5}
+          width="full"
+          onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
+        />
       </AuthCard>
+      {error && <SnackbarChip status="error" isStatus={true} message={error} />}
     </CenteredContainer>
   );
 };

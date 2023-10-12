@@ -6,10 +6,13 @@ import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../../shared/components/CustomButton/CustomButton';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/icons/Logo_icon.svg';
+import { useLogin } from './hooks/useLogin';
+import SnackbarChip from '../../shared/components/Snackbar/SnackbarChip';
 
 const Login = () => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const { handleSubmit, handleOnChange, error } = useLogin();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -26,6 +29,7 @@ const Login = () => {
         </Box>
         <Box mb={3}>
           <InputField
+            name="email"
             placeholder={t('authorization.input_user_placeholder')}
             type="text"
             endAdornment={
@@ -33,8 +37,10 @@ const Login = () => {
                 <AccountCircle sx={styles.inputIcon} />
               </InputAdornment>
             }
+            onChange={handleOnChange}
           />
           <InputField
+            name="password"
             placeholder={t('authorization.input_password_placeholder')}
             type={showPassword ? 'text' : 'password'}
             endAdornment={
@@ -53,16 +59,16 @@ const Login = () => {
                 </IconButton>
               </InputAdornment>
             }
+            onChange={handleOnChange}
           />
         </Box>
-        <Link to="/pagrindinis">
-          <CustomButton
-            text={t('authorization.login_button')}
-            color="light"
-            shadowSize={5}
-            width="full"
-          />
-        </Link>
+        <CustomButton
+          text={t('authorization.login_button')}
+          color="light"
+          shadowSize={5}
+          width="full"
+          onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
+        />
         <Divider sx={{ my: '16px' }}>
           <Box>{t('authorization.login_divider')}</Box>
         </Divider>
@@ -75,6 +81,7 @@ const Login = () => {
           />
         </Link>
       </AuthCard>
+      {error && <SnackbarChip status="error" isStatus={true} message={error} />}
     </CenteredContainer>
   );
 };
