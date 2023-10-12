@@ -19,6 +19,14 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  accountActivated: {
+    type: Boolean,
+    default: false,
+  },
+  accountPermissions: {
+    type: String,
+    default: "read",
+  },
 });
 
 userSchema.pre("save", async function () {
