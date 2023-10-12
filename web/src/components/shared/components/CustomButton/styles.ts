@@ -46,10 +46,9 @@ const getHoverStyle = (colorVariant: ColorVariant) => {
     case 'accent':
     case 'light':
       return {
-        boxShadow: `0px 0px 5px ${colors.primaryGreen.greenVibrant}`,
         filter: 'none',
         '&.MuiButton-root': {
-          filter: `drop-shadow(0px 0px 3px ${colors.primaryGreen.greenLight})`,
+          filter: `drop-shadow(0px 5px 5px ${colors.primaryGreen.greenDark})`,
           backgroundColor: colors.primaryGreen.greenLight,
         },
       };

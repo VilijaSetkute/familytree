@@ -4,9 +4,12 @@ export const colors = {
   white: '#FFF',
   dark: '#212121',
   primaryGreen: {
-    greenVibrant: '#3F0',
-    greenLight: '#60C646',
     greenLighter: '#99C58F',
+    greenLight: '#60C646',
+    greenVibrant: '#3F0',
+    green: '#008000',
+    greenDark: '#004400',
+    greenDarker: '#002200',
   },
   secondaryBlue: {
     blueDark: '#00477A',
