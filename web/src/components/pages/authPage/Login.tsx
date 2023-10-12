@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { AuthCard, CenteredContainer, InputField, styles } from './styles';
 import { useTranslation } from 'react-i18next';
-import { Box, Divider, IconButton, InputAdornment } from '@mui/material';
+import {
+  Box,
+  Divider,
+  IconButton,
+  InputAdornment,
+  Typography,
+} from '@mui/material';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../../shared/components/CustomButton/CustomButton';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/icons/Logo_icon.svg';
 import { useLogin } from './hooks/useLogin';
-import SnackbarChip from '../../shared/components/Snackbar/SnackbarChip';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -61,6 +66,16 @@ const Login = () => {
             }
             onChange={handleOnChange}
           />
+          <Typography
+            sx={{
+              textTransform: 'lowercase',
+              color: '#F04438',
+              fontWeight: 400,
+              fontSize: 12,
+            }}
+          >
+            {error}
+          </Typography>
         </Box>
         <CustomButton
           text={t('authorization.login_button')}
@@ -70,7 +85,11 @@ const Login = () => {
           onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
         />
         <Divider sx={{ my: '16px' }}>
-          <Box>{t('authorization.login_divider')}</Box>
+          <Box
+            sx={{ color: 'grey', fontWeight: 400, textTransform: 'lowercase' }}
+          >
+            {t('authorization.login_divider')}
+          </Box>
         </Divider>
         <Link to="/paskyra/registruotis">
           <CustomButton
@@ -81,7 +100,6 @@ const Login = () => {
           />
         </Link>
       </AuthCard>
-      {error && <SnackbarChip status="error" isStatus={true} message={error} />}
     </CenteredContainer>
   );
 };

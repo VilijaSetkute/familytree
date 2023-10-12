@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Snackbar } from '@mui/material';
 import MuiAlert, { AlertProps } from '@mui/material/Alert';
+import Slide, { SlideProps } from '@mui/material/Slide';
 
 interface SnackbarProp {
   status?: string;
@@ -13,6 +14,10 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   }
 );
+
+const SlideTransition = (props: SlideProps) => {
+  return <Slide {...props} direction="left" />;
+};
 
 const SnackbarChip: React.FC<SnackbarProp> = ({
   status,
@@ -54,6 +59,7 @@ const SnackbarChip: React.FC<SnackbarProp> = ({
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       onClose={handleClose}
       sx={{ color: 'white' }}
+      TransitionComponent={SlideTransition}
     >
       <Alert
         onClose={handleClose}

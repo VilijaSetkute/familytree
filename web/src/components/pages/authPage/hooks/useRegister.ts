@@ -11,6 +11,7 @@ export const useRegister = () => {
     password: '',
   });
   const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -23,14 +24,6 @@ export const useRegister = () => {
   const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     try {
-      // const { data } = await httpPost<{ success: boolean; message: string }>(
-      //   '/signup',
-      //   {
-      //     ...inputValue,
-      //     createdAt: Date(),
-      //   }
-      //   // { withCredentials: true }
-      // );
       const data = await httpPost<{ success: boolean; message: string }>(
         '/signup',
         { ...inputValue, createdAt: Date() }
@@ -39,20 +32,21 @@ export const useRegister = () => {
       if (success) {
         setTimeout(() => {
           navigate('/paskyra/prisijungti');
-        }, 1000);
+        }, 2000);
+        setInputValue({
+          ...inputValue,
+          email: '',
+          password: '',
+          username: '',
+        });
+        setMessage(message);
       } else {
         setError(message);
       }
     } catch (error) {
       console.log(error);
     }
-    setInputValue({
-      ...inputValue,
-      email: '',
-      password: '',
-      username: '',
-    });
   };
 
-  return { handleSubmit, handleOnChange, inputValue, error };
+  return { handleSubmit, handleOnChange, inputValue, error, message };
 };

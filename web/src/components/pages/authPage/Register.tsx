@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { AuthCard, CenteredContainer, InputField, styles } from './styles';
 import { useTranslation } from 'react-i18next';
-import { Box, IconButton, InputAdornment } from '@mui/material';
+import { Box, IconButton, InputAdornment, Typography } from '@mui/material';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../../shared/components/CustomButton/CustomButton';
 import { ReactComponent as Logo } from '../../../assets/icons/Logo_icon.svg';
@@ -11,7 +11,7 @@ import SnackbarChip from '../../shared/components/Snackbar';
 const Register = () => {
   const { t } = useTranslation();
   const [showPassword, setShowPassword] = useState<boolean>(false);
-  const { handleSubmit, handleOnChange, error } = useRegister();
+  const { handleSubmit, handleOnChange, error, message } = useRegister();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -93,6 +93,16 @@ const Register = () => {
             }
             // onChange={handleOnChange}
           />
+          <Typography
+            sx={{
+              textTransform: 'lowercase',
+              color: '#F04438',
+              fontWeight: 400,
+              fontSize: 12,
+            }}
+          >
+            {error}
+          </Typography>
         </Box>
         <CustomButton
           text={t('authorization.register_button')}
@@ -102,7 +112,9 @@ const Register = () => {
           onSubmit={(e: React.MouseEvent<HTMLButtonElement>) => handleSubmit(e)}
         />
       </AuthCard>
-      {error && <SnackbarChip status="error" isStatus={true} message={error} />}
+      {message && (
+        <SnackbarChip status="success" isStatus={true} message={message} />
+      )}
     </CenteredContainer>
   );
 };
