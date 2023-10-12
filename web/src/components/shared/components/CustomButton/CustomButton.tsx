@@ -7,6 +7,9 @@ interface ButtonProps {
   color: ColorVariant;
   shadowSize?: number;
   width?: WidthVariant;
+  onSubmit?: (
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => void | undefined | Promise<void>;
 }
 
 const CustomButton: React.FC<ButtonProps> = ({
@@ -14,6 +17,7 @@ const CustomButton: React.FC<ButtonProps> = ({
   color,
   shadowSize,
   width = 'content',
+  onSubmit,
 }) => {
   return (
     <ButtonContainer
@@ -23,7 +27,7 @@ const CustomButton: React.FC<ButtonProps> = ({
       colorVariant={color}
       className="button-hover"
     >
-      <ButtonText colorVariant={color} uppercase={false}>
+      <ButtonText colorVariant={color} uppercase={false} onClick={onSubmit}>
         {text}
       </ButtonText>
     </ButtonContainer>
