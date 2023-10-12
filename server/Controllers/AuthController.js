@@ -17,7 +17,7 @@ module.exports.Signup = async (req, res, next) => {
     });
     res
       .status(201)
-      .json({ message: "User created successfully", success: true, user });
+      .json({ message: "Request sent successfully", success: true, user });
     next();
   } catch (error) {
     console.error(error);
@@ -32,11 +32,14 @@ module.exports.Login = async (req, res, next) => {
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({ message: "Incorrect password or email" });
+      return res.json({ message: `User not found with email ${email}` });
     }
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return res.json({ message: "Incorrect password or email" });
+      return res.json({ message: `Incorrect password for email ${email}` });
+    }
+    if (user && auth && !user.accountActivated) {
+      return res.json({ message: "Your identity has not been confirmed yet" });
     }
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
