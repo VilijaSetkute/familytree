@@ -22,7 +22,7 @@
     "input_user_placeholder": "el. paštas",
     "input_password_placeholder": "slaptažodis",
     "input_password_repeat_placeholder": "pakartokite slaptažodį",
-    "register_button": "kurti paskyrą"
+    "register_button": "prašyti prieigos"
   },
   "buttons": {
     "button_landing_start": "pradėti"
