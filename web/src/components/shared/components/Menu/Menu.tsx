@@ -1,6 +1,6 @@
 import { Box, ClickAwayListener } from '@mui/material';
 import { Notifications } from '@mui/icons-material';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../../../../assets/icons/Logo_icon.svg';
 import { useTranslation } from 'react-i18next';
 import {
@@ -14,18 +14,15 @@ import {
 import { Link } from 'react-router-dom';
 import StyledNavButton from './StyledNavButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import { UserContext } from '../../../../utils/context/userContext';
 
 const Menu = () => {
   const { t } = useTranslation();
+  const { isAuthorized, user } = useContext(UserContext);
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(
     window.innerWidth >= 700
   );
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [isAuthorized] = useState<boolean>(false);
-  const [profile] = useState({
-    userName: 'Vilija',
-    email: 'vilija.setkute@gmail.com',
-  });
 
   const updateScreenWidth = () => {
     const width = window.innerWidth;
@@ -89,7 +86,7 @@ const Menu = () => {
                         <Notifications sx={{ fill: 'white' }} />
                       </Box>
                       <Box marginRight="16px" sx={{ color: 'white' }}>
-                        {profile.userName}
+                        {user}
                       </Box>
                     </Box>
                   ) : (
