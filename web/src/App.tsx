@@ -16,15 +16,7 @@ import Register from './components/pages/authPage/Register';
 import { useApiCall } from './service/useApiCall';
 import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
-interface User {
-  isAuthorized: boolean;
-  user: string | undefined;
-}
-
-export interface UserResponse {
-  status: boolean;
-  user: string | undefined;
-}
+import { User, UserResponse } from './components/shared/models/authorizationModel';
 
 function App() {
   const { t } = useTranslation();
