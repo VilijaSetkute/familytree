@@ -40,8 +40,6 @@ export const useRegister = () => {
   const submit: SubmitHandler<RegistrationForm> = async (form) => {
     const values = { userName: form.userName, email: form.email, password: form.password, createdAt: Date() };
 
-    console.log(form);
-
     try {
       const data = await httpPost<{ success: boolean; message: string }>('/signup', { ...values });
       const { success, message } = data;
