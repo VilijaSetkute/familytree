@@ -3,22 +3,15 @@ import { ButtonContainer, ButtonText } from './styles';
 import { ColorVariant, WidthVariant } from './model';
 
 interface ButtonProps {
+  type?: 'submit' | 'button' | 'text' | undefined;
   text: string;
   color: ColorVariant;
   shadowSize?: number;
   width?: WidthVariant;
-  onSubmit?: (
-    e: React.MouseEvent<HTMLButtonElement>
-  ) => void | undefined | Promise<void>;
+  onClick?: () => void;
 }
 
-const CustomButton: React.FC<ButtonProps> = ({
-  text,
-  color,
-  shadowSize,
-  width = 'content',
-  onSubmit,
-}) => {
+const CustomButton: React.FC<ButtonProps> = ({ text, color, shadowSize, width = 'content', onClick }) => {
   return (
     <ButtonContainer
       width={width}
@@ -26,8 +19,9 @@ const CustomButton: React.FC<ButtonProps> = ({
       disableRipple
       colorVariant={color}
       className="button-hover"
+      onClick={onClick}
     >
-      <ButtonText colorVariant={color} uppercase={false} onClick={onSubmit}>
+      <ButtonText colorVariant={color} uppercase={false}>
         {text}
       </ButtonText>
     </ButtonContainer>
