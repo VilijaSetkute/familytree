@@ -3,6 +3,13 @@ export interface LoginForm {
   password: string;
 }
 
+export interface RegistrationForm {
+  userName: string;
+  email: string;
+  password: string;
+  passwordConfirmation: string;
+}
+
 export interface User {
   isAuthorized: boolean;
   user: string | undefined;
