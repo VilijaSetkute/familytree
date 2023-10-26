@@ -16,7 +16,6 @@ import Register from './components/pages/authPage/Register';
 import { useApiCall } from './service/useApiCall';
 import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
-
 interface User {
   isAuthorized: boolean;
   user: string | undefined;

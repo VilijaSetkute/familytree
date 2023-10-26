@@ -32,14 +32,20 @@ module.exports.Login = async (req, res, next) => {
     }
     const user = await User.findOne({ email });
     if (!user) {
-      return res.json({ message: `User not found with email ${email}` });
+      return res
+        .status(400)
+        .json({ message: `User not found with email ${email}` });
     }
     const auth = await bcrypt.compare(password, user.password);
     if (!auth) {
-      return res.json({ message: `Incorrect password for email ${email}` });
+      return res
+        .status(400)
+        .json({ message: `Incorrect password for email ${email}` });
     }
     if (user && auth && !user.accountActivated) {
-      return res.json({ message: "Your identity has not been confirmed yet" });
+      return res
+        .status(400)
+        .json({ message: "Your identity has not been confirmed yet" });
     }
     const token = createSecretToken(user._id);
     res.cookie("token", token, {
@@ -47,7 +53,7 @@ module.exports.Login = async (req, res, next) => {
       httpOnly: false,
     });
     res
-      .status(201)
+      .status(200)
       .json({ message: "User logged in successfully", success: true });
     next();
   } catch (error) {
