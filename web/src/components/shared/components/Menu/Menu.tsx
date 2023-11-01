@@ -1,5 +1,5 @@
 import { Box, ClickAwayListener } from '@mui/material';
-import { Notifications } from '@mui/icons-material';
+import { Notifications, Logout } from '@mui/icons-material';
 import React, { useContext, useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../../../../assets/icons/Logo_icon.svg';
 import { useTranslation } from 'react-i18next';
@@ -11,18 +11,24 @@ import {
   MenuListContainer,
   MenuPositioning,
 } from './styles';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import StyledNavButton from './StyledNavButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { UserContext } from '../../../../utils/context/userContext';
+import Cookies from 'js-cookie';
 
 const Menu = () => {
   const { t } = useTranslation();
-  const { isAuthorized, user } = useContext(UserContext);
-  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(
-    window.innerWidth >= 700
-  );
+  const { isAuthorized, user, setUser } = useContext(UserContext);
+  const [isMenuVisible, setIsMenuVisible] = useState<boolean>(window.innerWidth >= 700);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  const logoutUser = () => {
+    Cookies.remove('token');
+    setUser({ isAuthorized: false, user: undefined });
+    navigate('/paskyra/prisijungti');
+  };
 
   const updateScreenWidth = () => {
     const width = window.innerWidth;
@@ -52,52 +58,33 @@ const Menu = () => {
                 <Box display="flex" alignItems="center">
                   <MenuListContainer visiblemenu={`${isMenuVisible}`}>
                     <MenuCloseIcon onClick={() => setIsMenuVisible(false)} />
-                    <StyledNavButton
-                      to="/pagrindinis"
-                      text={t('menu.home')}
-                      onClose={handleMenuItem}
-                    />
-                    <StyledNavButton
-                      to="/medis"
-                      text={t('menu.tree')}
-                      onClose={handleMenuItem}
-                    />
-                    <StyledNavButton
-                      to="/vietoves"
-                      text={t('menu.locations')}
-                      onClose={handleMenuItem}
-                    />
-                    <StyledNavButton
-                      to="/galerija"
-                      text={t('menu.gallery')}
-                      onClose={handleMenuItem}
-                    />
+                    <StyledNavButton to="/pagrindinis" text={t('menu.home')} onClose={handleMenuItem} />
+                    <StyledNavButton to="/medis" text={t('menu.tree')} onClose={handleMenuItem} />
+                    <StyledNavButton to="/vietoves" text={t('menu.locations')} onClose={handleMenuItem} />
+                    <StyledNavButton to="/galerija" text={t('menu.gallery')} onClose={handleMenuItem} />
                   </MenuListContainer>
                 </Box>
 
                 <Box display="flex" alignItems="center">
                   {isAuthorized ? (
-                    <Box
-                      display="flex"
-                      justifyItems="space-between"
-                      alignItems="center"
-                    >
+                    <Box display="flex" justifyItems="space-between" alignItems="center" marginRight="8px">
                       <Box marginRight="8px" sx={{ color: 'white' }}>
-                        <Notifications sx={{ fill: 'white' }} />
+                        <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
                       </Box>
                       <Box marginRight="16px" sx={{ color: 'white' }}>
                         {user}
                       </Box>
+                      <Box>
+                        <Logout sx={{ fill: 'white', cursor: 'pointer' }} onClick={logoutUser} />
+                      </Box>
                     </Box>
                   ) : (
                     <Link to="/paskyra/prisijungti">
-                      <MenuAuthButton disableRipple>
-                        {t('authorization.menu_auth')}
-                      </MenuAuthButton>
+                      <MenuAuthButton disableRipple>{t('authorization.menu_auth')}</MenuAuthButton>
                     </Link>
                   )}
                   <LanguageSelector />
-                  <MenuExpandIcon onClick={() => setIsMenuVisible(true)} />
+                  <MenuExpandIcon sx={{ fill: 'white', cursor: 'pointer' }} onClick={() => setIsMenuVisible(true)} />
                 </Box>
               </Box>
             </MenuPositioning>

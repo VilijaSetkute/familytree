@@ -47,11 +47,6 @@ function App() {
     verifyCookie();
   }, []);
 
-  // const Logout = () => {
-  //   Cookies.remove('token');
-  //   navigate('/paskyra/prisijungti');
-  // };
-
   useEffect(() => {
     document.title = t('app_title');
   }, [t]);
