@@ -1,12 +1,19 @@
 import { AxiosRequestConfig } from 'axios';
+import { LoginForm, CreateAccountForm } from '../../models/authorizationModel';
 
-export interface LoginForm {
-  email: string;
-  password: string;
-}
+export const verifyUser = (): Partial<AxiosRequestConfig> => ({
+  url: '/',
+  method: 'POST',
+});
 
 export const login = (data: LoginForm): Partial<AxiosRequestConfig> => ({
-  url: 'http://localhost:7000/login',
+  url: '/login',
+  method: 'POST',
+  data,
+});
+
+export const register = (data: CreateAccountForm): Partial<AxiosRequestConfig> => ({
+  url: '/signup',
   method: 'POST',
   data,
 });
