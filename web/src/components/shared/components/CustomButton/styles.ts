@@ -31,7 +31,7 @@ const getButtonTextColor = (colorVariant: ColorVariant) => {
     case 'light':
       return colors.white;
     case 'pale':
-      return colors.dark;
+      return colors.dark.main;
     default:
       return colors.white;
   }
@@ -53,7 +53,7 @@ const getHoverStyle = (colorVariant: ColorVariant) => {
         },
       };
     case 'pale':
-      return colors.dark;
+      return colors.dark.main;
     default:
       return colors.white;
   }

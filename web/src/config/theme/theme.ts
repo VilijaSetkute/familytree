@@ -2,7 +2,10 @@
 
 export const colors = {
   white: '#FFF',
-  dark: '#212121',
+  dark: {
+    main: '#212121',
+    hint: '#98A2B3',
+  },
   primaryGreen: {
     greenLighter: '#99C58F',
     greenLight: '#60C646',
@@ -13,6 +16,9 @@ export const colors = {
   },
   secondaryBlue: {
     blueDark: '#00477A',
+  },
+  error: {
+    error: '#F04438',
   },
 };
 
