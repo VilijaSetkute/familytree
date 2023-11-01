@@ -1,10 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
-const publicUrl = 'https://back.mususaknys.lt';
-const localUrl = 'http://localhost:7000';
 const production = process.env.REACT_APP_PRODUCTION === 'true';
-const baseURL = production ? publicUrl : localUrl;
+const baseURL = production ? process.env.REACT_APP_PUBLIC_URL : process.env.REACT_APP_LOCAL_URL;
 
 interface ResponseWrapper<T> {
   data: T | null;
@@ -15,7 +13,6 @@ interface Response<T> {
   didError: boolean;
   message: string;
   data: T | null;
-  status?: number;
   errorMessages?: string[];
 }
 
@@ -67,14 +64,14 @@ export async function httpRequest<T>(options: Partial<AxiosRequestConfig>): Prom
     'Content-Type': 'application/json;charset=UTF-8',
   };
 
-  let result = await axios({ ...options, baseURL: options.baseURL || baseURL, headers });
+  let result = await axios({ ...options, baseURL: options.baseURL || baseURL, headers, withCredentials: true });
 
   if (result.status > 199 && result.status <= 299) {
-    result = { ...result, data: { data: result.data, message: '', didError: false, errorMessages: [] } };
+    result = { ...result, data: { data: result.data, message: null, didError: false, errorMessages: null } };
   } else {
     result = {
       ...result,
-      data: { data: null, message: 'authorization error', didError: true, errorMessages: [result.data.message] },
+      data: { data: null, message: null, didError: true, errorMessages: [result.data.message] },
     };
   }
 
@@ -95,8 +92,6 @@ export function useHttpRequest<T>() {
       setState(apiLoadSuccess(data.data));
       const _data = data.data ?? data;
       res = { data: _data, success: true } as ResponseWrapper<T>;
-      // console.log(data.data);
-      // console.log(_data);
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -110,8 +105,6 @@ export function useHttpRequest<T>() {
 
     return res;
   };
-
-  // console.log('state', state);
 
   return { ...state, call };
 }

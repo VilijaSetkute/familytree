@@ -3,9 +3,10 @@ import { LoginForm, UserResponse } from '../../../shared/models/authorizationMod
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
-import { useApiCall } from '../../../../service/useApiCall';
 import { useContext, useState } from 'react';
 import { UserContext } from '../../../../utils/context/userContext';
+import { useHttpRequest } from '../../../shared/service/api/useHttpRequest';
+import { login, verifyUser } from '../../../shared/service/api/authorization.api';
 
 const defaultValues = {
   email: '',
@@ -20,8 +21,10 @@ const validationSchema = yup.object().shape({
 export const useLogin = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-  const { httpPost } = useApiCall();
   const [error, setError] = useState('');
+
+  const loginApi = useHttpRequest<LoginForm>();
+  const authApi = useHttpRequest<UserResponse>();
 
   const loginForm = useForm<LoginForm>({
     defaultValues: defaultValues,
@@ -34,20 +37,20 @@ export const useLogin = () => {
   const submit: SubmitHandler<LoginForm> = async (form) => {
     const values = { email: form.email, password: form.password };
 
-    try {
-      const data = await httpPost<{ success: boolean; message: string }>('/login', { ...values });
-      const { success, message } = data;
-      if (success) {
-        const { status, user } = await httpPost<UserResponse>('/', {});
+    const { success: loginSucsess } = await loginApi.call(login(values));
+
+    if (loginSucsess) {
+      const authorization = await authApi.call(verifyUser());
+      if (authorization.data?.status) {
         setTimeout(() => {
-          setUser({ isAuthorized: status, user });
+          setUser({ isAuthorized: authorization.data?.status as boolean, user: authorization.data?.user });
           navigate('/pagrindinis');
         }, 1000);
       } else {
-        setError(message);
+        setError('something went wrong');
       }
-    } catch (error) {
-      console.log(error);
+    } else {
+      setError('something went wrong');
     }
   };
 

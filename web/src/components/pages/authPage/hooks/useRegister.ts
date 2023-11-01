@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useApiCall } from '../../../../service/useApiCall';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { RegistrationForm } from '../../../shared/models/authorizationModel';
+import { RegistrationForm, CreateAccountForm } from '../../../shared/models/authorizationModel';
+import { useHttpRequest } from '../../../shared/service/api/useHttpRequest';
+import { register } from '../../../shared/service/api/authorization.api';
 
 const defaultValues = {
   userName: '',
@@ -25,9 +26,10 @@ const validationSchema = yup.object().shape({
 
 export const useRegister = () => {
   const navigate = useNavigate();
-  const { httpPost } = useApiCall();
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
+
+  const registerApi = useHttpRequest<RegistrationForm>();
 
   const registrationForm = useForm<RegistrationForm>({
     defaultValues: defaultValues,
@@ -38,21 +40,22 @@ export const useRegister = () => {
   });
 
   const submit: SubmitHandler<RegistrationForm> = async (form) => {
-    const values = { userName: form.userName, email: form.email, password: form.password, createdAt: Date() };
+    const values: CreateAccountForm = {
+      userName: form.userName,
+      email: form.email,
+      password: form.password,
+      createdAt: Date(),
+    };
 
-    try {
-      const data = await httpPost<{ success: boolean; message: string }>('/signup', { ...values });
-      const { success, message } = data;
-      if (success) {
-        setTimeout(() => {
-          navigate('/paskyra/prisijungti');
-        }, 2000);
-        setMessage(message);
-      } else {
-        setError(message);
-      }
-    } catch (error) {
-      console.log(error);
+    const testRes = await registerApi.call(register({ ...values }));
+
+    if (testRes.success) {
+      setTimeout(() => {
+        navigate('/paskyra/prisijungti');
+      }, 2000);
+      setMessage('Request sent successfully');
+    } else {
+      setError(message);
     }
   };
 
