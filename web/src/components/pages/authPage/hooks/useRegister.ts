@@ -7,6 +7,9 @@ import { RegistrationForm, CreateAccountForm } from '../../../shared/models/auth
 import { useHttpRequest } from '../../../shared/service/api/useHttpRequest';
 import { register } from '../../../shared/service/api/authorization.api';
 
+const EMAIL_REGX =
+  /^(([^<>()[\]\\.,;:\s@"]+(.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+
 const defaultValues = {
   userName: '',
   email: '',
@@ -16,7 +19,7 @@ const defaultValues = {
 
 const validationSchema = yup.object().shape({
   userName: yup.string().required('Please provide a user name'),
-  email: yup.string().required('Please provide an email'),
+  email: yup.string().required('Please provide an email').matches(EMAIL_REGX, 'Invalid email address'),
   password: yup.string().required('Please provide a password'),
   passwordConfirmation: yup
     .string()
@@ -26,7 +29,6 @@ const validationSchema = yup.object().shape({
 
 export const useRegister = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
   const registerApi = useHttpRequest<RegistrationForm>();
@@ -52,12 +54,10 @@ export const useRegister = () => {
     if (testRes.success) {
       setTimeout(() => {
         navigate('/paskyra/prisijungti');
-      }, 2000);
+      }, 1000);
       setMessage('Request sent successfully');
-    } else {
-      setError(message);
     }
   };
 
-  return { registrationForm, submit, error, message };
+  return { registrationForm, submit, error: registerApi.error, message };
 };

@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { AuthCard, CenteredContainer, InputField, styles } from './styles';
 import { useTranslation } from 'react-i18next';
-import { Box, IconButton, InputAdornment, Typography } from '@mui/material';
+import { Box, IconButton, InputAdornment } from '@mui/material';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../../shared/components/CustomButton/CustomButton';
 import { ReactComponent as Logo } from '../../../assets/icons/Logo_icon.svg';
 import { useRegister } from './hooks/useRegister';
 import SnackbarChip from '../../shared/components/Snackbar';
 import { Controller } from 'react-hook-form';
+import { ErrorTypography, HintTypography } from '../../shared/styledComponents/typography.styles';
 
 const Register = () => {
   const { t } = useTranslation();
@@ -113,16 +114,14 @@ const Register = () => {
                 />
               )}
             />
-            <Typography
-              sx={{
-                textTransform: 'lowercase',
-                color: '#F04438',
-                fontWeight: 400,
-                fontSize: 12,
-              }}
-            >
-              {error}
-            </Typography>
+            <Box margin={'8px 0'}>
+              <HintTypography>{t('authorization.password_rules')}</HintTypography>
+            </Box>
+            <Box>
+              <ErrorTypography>{error}</ErrorTypography>
+              <ErrorTypography>{registrationForm.formState.errors.email?.message}</ErrorTypography>
+              <ErrorTypography>{registrationForm.formState.errors.passwordConfirmation?.message}</ErrorTypography>
+            </Box>
           </Box>
           <CustomButton
             text={t('authorization.register_button')}

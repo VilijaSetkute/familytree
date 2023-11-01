@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { AuthCard, CenteredContainer, InputField, styles } from './styles';
 import { useTranslation } from 'react-i18next';
-import { Box, Divider, IconButton, InputAdornment, Typography } from '@mui/material';
+import { Box, Divider, IconButton, InputAdornment } from '@mui/material';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
 import CustomButton from '../../shared/components/CustomButton/CustomButton';
 import { Link } from 'react-router-dom';
 import { ReactComponent as Logo } from '../../../assets/icons/Logo_icon.svg';
 import { useLogin } from './hooks/useLogin';
 import { Controller } from 'react-hook-form';
+import { ErrorTypography } from '../../shared/styledComponents/typography.styles';
 
 const Login = () => {
   const { t } = useTranslation();
@@ -69,16 +70,11 @@ const Login = () => {
                 />
               )}
             />
-            <Typography
-              sx={{
-                textTransform: 'lowercase',
-                color: '#F04438',
-                fontWeight: 400,
-                fontSize: 12,
-              }}
-            >
-              {error}
-            </Typography>
+            <Box>
+              <ErrorTypography>{error}</ErrorTypography>
+              <ErrorTypography>{loginForm.formState.errors.email?.message}</ErrorTypography>
+              <ErrorTypography>{loginForm.formState.errors.password?.message}</ErrorTypography>
+            </Box>
           </Box>
           <CustomButton
             type="submit"
