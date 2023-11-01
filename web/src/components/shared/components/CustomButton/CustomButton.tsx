@@ -1,6 +1,7 @@
 import React from 'react';
 import { ButtonContainer, ButtonText } from './styles';
 import { ColorVariant, WidthVariant } from './model';
+import { CircularProgress } from '@mui/material';
 
 interface ButtonProps {
   type?: 'submit' | 'button' | 'text' | undefined;
@@ -9,9 +10,19 @@ interface ButtonProps {
   shadowSize?: number;
   width?: WidthVariant;
   onClick?: () => void;
+  isLoading?: boolean;
+  withLoader?: boolean;
 }
 
-const CustomButton: React.FC<ButtonProps> = ({ text, color, shadowSize, width = 'content', onClick }) => {
+const CustomButton: React.FC<ButtonProps> = ({
+  text,
+  color,
+  shadowSize,
+  width = 'content',
+  onClick,
+  isLoading = false,
+  withLoader = false,
+}) => {
   return (
     <ButtonContainer
       width={width}
@@ -19,11 +30,16 @@ const CustomButton: React.FC<ButtonProps> = ({ text, color, shadowSize, width = 
       disableRipple
       colorVariant={color}
       className="button-hover"
-      onClick={onClick}
+      onClick={isLoading ? undefined : onClick}
+      isLoading={isLoading}
     >
-      <ButtonText colorVariant={color} uppercase={false}>
-        {text}
-      </ButtonText>
+      {isLoading && withLoader ? (
+        <CircularProgress size="30px" />
+      ) : (
+        <ButtonText colorVariant={color} uppercase={false}>
+          {text}
+        </ButtonText>
+      )}
     </ButtonContainer>
   );
 };

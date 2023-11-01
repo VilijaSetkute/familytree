@@ -63,7 +63,8 @@ export const ButtonContainer = styled(Button)<{
   colorVariant: ColorVariant;
   shadow: number;
   width: WidthVariant;
-}>(({ colorVariant, shadow, width }) => ({
+  isLoading: boolean;
+}>(({ colorVariant, shadow, width, isLoading }) => ({
   width: width === 'content' ? 'fit-content' : '100%',
   padding: '8px 40px',
   borderRadius: '100px',
@@ -71,6 +72,8 @@ export const ButtonContainer = styled(Button)<{
   filter: `drop-shadow(0px ${shadow}px ${shadow}px rgba(0, 0, 0, 0.75))`,
   transition: 'all 0.1s ease',
   '&:hover': getHoverStyle(colorVariant),
+  opacity: isLoading ? 0.5 : 1,
+  cursor: isLoading ? 'default' : 'pointer',
 }));
 
 export const ButtonText = styled(Typography)<{
