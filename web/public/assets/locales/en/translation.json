@@ -22,7 +22,8 @@
     "input_user_placeholder": "email",
     "input_password_placeholder": "password",
     "input_password_repeat_placeholder": "repeat password",
-    "register_button": "request account"
+    "register_button": "request account",
+    "password_rules": "Password should have at least: 12 characters, one uppercase letter, one lowercase letter, one number, one symbol"
   },
   "buttons": {
     "button_landing_start": "start here"

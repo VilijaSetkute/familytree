@@ -22,7 +22,8 @@
     "input_user_placeholder": "el. paštas",
     "input_password_placeholder": "slaptažodis",
     "input_password_repeat_placeholder": "pakartokite slaptažodį",
-    "register_button": "prašyti prieigos"
+    "register_button": "prašyti prieigos",
+    "password_rules": "Slaptažodis turi būti mažiausiai 12 simbolių, bent viena didžioji raidė, bent viena mažoji raidė, bent vienas skaičius, bent vienas simbolis"
   },
   "buttons": {
     "button_landing_start": "pradėti"
