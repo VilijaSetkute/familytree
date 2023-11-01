@@ -71,7 +71,7 @@ export async function httpRequest<T>(options: Partial<AxiosRequestConfig>): Prom
   } else {
     result = {
       ...result,
-      data: { data: null, message: null, didError: true, errorMessages: [result.data.message] },
+      data: { data: null, message: result.data, didError: true, errorMessages: [result.data] },
     };
   }
 
