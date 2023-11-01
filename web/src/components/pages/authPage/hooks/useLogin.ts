@@ -46,10 +46,10 @@ export const useLogin = () => {
         setTimeout(() => {
           setUser({ isAuthorized: authorization.data?.status as boolean, user: authorization.data?.user });
           navigate('/pagrindinis');
-        }, 1000);
+        }, 0);
       }
     }
   };
 
-  return { loginForm, submit, error: loginApi.error };
+  return { loginForm, submit, error: loginApi.error, loading: loginApi.loading || authApi.loading };
 };

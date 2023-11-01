@@ -54,10 +54,10 @@ export const useRegister = () => {
     if (testRes.success) {
       setTimeout(() => {
         navigate('/paskyra/prisijungti');
-      }, 1000);
-      setMessage('Request sent successfully');
+        setMessage('Request sent successfully');
+      }, 0);
     }
   };
 
-  return { registrationForm, submit, error: registerApi.error, message };
+  return { registrationForm, submit, error: registerApi.error, message, loading: registerApi.loading };
 };

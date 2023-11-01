@@ -12,7 +12,7 @@ import { ErrorTypography } from '../../shared/styledComponents/typography.styles
 
 const Login = () => {
   const { t } = useTranslation();
-  const { loginForm, submit, error } = useLogin();
+  const { loginForm, submit, error, loading } = useLogin();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -82,7 +82,9 @@ const Login = () => {
             color="light"
             shadowSize={5}
             width="full"
-            onClick={loginForm.handleSubmit(submit)}
+            onClick={loading ? undefined : loginForm.handleSubmit(submit)}
+            isLoading={loading}
+            withLoader={true}
           />
         </form>
         <Divider sx={{ my: '16px' }}>
@@ -90,8 +92,14 @@ const Login = () => {
             {t('authorization.login_divider')}
           </Box>
         </Divider>
-        <Link to="/paskyra/registruotis">
-          <CustomButton text={t('authorization.register_button')} color="light" shadowSize={5} width="full" />
+        <Link to={'/paskyra/registruotis'} style={{ pointerEvents: loading ? 'none' : undefined }}>
+          <CustomButton
+            text={t('authorization.register_button')}
+            color="light"
+            shadowSize={5}
+            width="full"
+            isLoading={loading}
+          />
         </Link>
       </AuthCard>
     </CenteredContainer>

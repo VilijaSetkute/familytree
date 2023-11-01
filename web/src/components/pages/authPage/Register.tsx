@@ -12,7 +12,7 @@ import { ErrorTypography, HintTypography } from '../../shared/styledComponents/t
 
 const Register = () => {
   const { t } = useTranslation();
-  const { registrationForm, submit, error, message } = useRegister();
+  const { registrationForm, submit, error, message, loading } = useRegister();
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -128,7 +128,9 @@ const Register = () => {
             color="light"
             shadowSize={5}
             width="full"
-            onClick={registrationForm.handleSubmit(submit)}
+            onClick={loading ? undefined : registrationForm.handleSubmit(submit)}
+            isLoading={loading}
+            withLoader={true}
           />
         </form>
       </AuthCard>
