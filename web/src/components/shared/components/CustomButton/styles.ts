@@ -16,9 +16,9 @@ const getButtonColor = (colorVariant: ColorVariant) => {
     case 'accent':
       return colors.primaryGreen.greenVibrant;
     case 'light':
-      return colors.primaryGreen.greenLight;
+      return colors.primaryGreen.green300;
     case 'pale':
-      return colors.primaryGreen.greenLighter;
+      return colors.primaryGreen.green200;
     default:
       return `linear-gradient(270deg, ${colors.primaryGreen.greenVibrant} 0%, ${colors.secondaryBlue.blueDark} 100%)`;
   }
@@ -48,8 +48,8 @@ const getHoverStyle = (colorVariant: ColorVariant) => {
       return {
         filter: 'none',
         '&.MuiButton-root': {
-          filter: `drop-shadow(0px 5px 5px ${colors.primaryGreen.greenDark})`,
-          backgroundColor: colors.primaryGreen.greenLight,
+          filter: `drop-shadow(0px 5px 5px ${colors.primaryGreen.green700})`,
+          backgroundColor: colors.primaryGreen.green300,
         },
       };
     case 'pale':

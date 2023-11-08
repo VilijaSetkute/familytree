@@ -9,7 +9,7 @@ interface StylesProps {
 
 export const styles: StylesProps = {
   inputIcon: {
-    fill: colors.primaryGreen.greenLight,
+    fill: colors.primaryGreen.green300,
   },
 };
 

@@ -5,17 +5,20 @@ export const colors = {
     hint: '#98A2B3',
   },
   primaryGreen: {
-    greenLighter: '#99C58F',
-    greenLight: '#60C646',
     greenVibrant: '#3F0',
-    green: '#008000',
-    greenDark: '#004400',
-    greenDarker: '#002200',
+    green100: '#e8f5e9',
+    green200: '#99C58F',
+    green300: '#60C646',
+    green400: '#388e3c',
+    green500: '#008000',
+    green600: '#0A610A',
+    green700: '#004400',
   },
   secondaryBlue: {
     blueDark: '#00477A',
   },
   error: {
     error: '#F04438',
+    errorDarker: '#B5251B',
   },
 };

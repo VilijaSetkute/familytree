@@ -30,25 +30,23 @@ export const MenuPositioning = styled(Box)({
   margin: '0 24px',
 });
 
-export const MenuListContainer = styled(Box)<{ visiblemenu: string }>(
-  ({ visiblemenu }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    '@media (max-width: 700px)': {
-      display: visiblemenu === 'true' ? 'block' : 'none',
-      flexDirection: 'column',
-      backgroundColor: 'gray',
-      width: '100vw',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      zIndex: 1,
-      background: 'radial-gradient(green, teal)',
-      filter: 'drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.75))',
-      padding: '24px 0',
-    },
-  })
-);
+export const MenuListContainer = styled(Box)<{ visiblemenu: string }>(({ visiblemenu }) => ({
+  display: 'flex',
+  alignItems: 'center',
+  '@media (max-width: 700px)': {
+    display: visiblemenu === 'true' ? 'block' : 'none',
+    flexDirection: 'column',
+    backgroundColor: 'gray',
+    width: '100vw',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1,
+    background: 'radial-gradient(green, teal)',
+    filter: 'drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.75))',
+    padding: '24px 0',
+  },
+}));
 
 export const MenuNavButton = styled(Button)<{
   isactive: string;
@@ -61,13 +59,11 @@ export const MenuNavButton = styled(Button)<{
   maxWidth: 'fit-content',
   textDecoration: 'none',
   boxSizing: 'border-box',
-  borderBottom: `2px solid ${
-    isactive === 'true' ? colors.primaryGreen.greenLight : 'transparent'
-  }`,
+  borderBottom: `2px solid ${isactive === 'true' ? colors.primaryGreen.green300 : 'transparent'}`,
   borderRadius: 0,
   '&:hover': {
     backgroundColor: 'transparent',
-    borderBottom: `1px solid ${colors.primaryGreen.greenLight}`,
+    borderBottom: `1px solid ${colors.primaryGreen.green300}`,
   },
   '& @media screen and (max-width: 1200px)': {
     backgroundColor: 'yellow',
@@ -76,9 +72,9 @@ export const MenuNavButton = styled(Button)<{
 
 export const MenuAuthButton = styled(Button)({
   margin: '0 8px',
-  color: colors.primaryGreen.greenLighter,
+  color: colors.primaryGreen.green200,
   cursor: 'pointer',
-  border: `2px solid ${colors.primaryGreen.greenLight}`,
+  border: `2px solid ${colors.primaryGreen.green300}`,
   borderRadius: '100px 0 100px 100px',
   padding: '4px 16px',
   '&:hover': {
@@ -89,7 +85,7 @@ export const MenuAuthButton = styled(Button)({
 export const MenuExpandIcon = styled(Menu)({
   display: 'none',
   marginLeft: '8px',
-  color: colors.primaryGreen.greenLighter,
+  color: colors.primaryGreen.green200,
   fontSize: '32px',
   cursor: 'pointer',
   '@media (max-width: 700px)': {
@@ -103,7 +99,7 @@ export const MenuCloseIcon = styled(Close)({
   right: 0,
   display: 'none',
   margin: '8px 8px 0 0',
-  color: colors.primaryGreen.greenLighter,
+  color: colors.primaryGreen.green200,
   fontSize: '32px',
   cursor: 'pointer',
   '@media (max-width: 700px)': {
