@@ -17,15 +17,18 @@ import { useApiCall } from './service/useApiCall';
 import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
 import { User, UserResponse } from './components/shared/models/authorizationModel';
+import AdminPage from './components/pages/adminPage/AdminPage';
 
 function App() {
   const { t } = useTranslation();
-  const { isAuthorized, user } = useContext(UserContext);
+  const { isAuthorized, userName, accountPermissions, id } = useContext(UserContext);
   const { httpPost } = useApiCall();
   const navigate = useNavigate();
   const [userStatus, setUserStatus] = useState<User>({
     isAuthorized,
-    user,
+    userName,
+    accountPermissions,
+    id,
   });
 
   const verifyCookie = async () => {
@@ -36,7 +39,12 @@ function App() {
     const { status, user } = await httpPost<UserResponse>('/', {});
 
     const setAuthorized = () => {
-      setUserStatus({ isAuthorized: status, user });
+      setUserStatus({
+        isAuthorized: status,
+        id: user?.id,
+        userName: user?.userName,
+        accountPermissions: user?.accountPermissions,
+      });
       navigate('/pagrindinis');
     };
 
@@ -55,7 +63,9 @@ function App() {
     <UserContext.Provider
       value={{
         isAuthorized: userStatus.isAuthorized,
-        user: userStatus.user,
+        id: userStatus.id,
+        userName: userStatus.userName,
+        accountPermissions: userStatus.accountPermissions,
         setUser: setUserStatus,
       }}
     >
@@ -69,6 +79,9 @@ function App() {
           <Route path="/galerija" element={<GalleryPage />} />
           <Route path="/vietoves" element={<LocationsPage />} />
           <Route path="/medis" element={<TreePage />} />
+
+          <Route path="/admin" element={<AdminPage />} />
+
           <Route path="*" element={<NoContentPage />} />
         </Routes>
       </Box>

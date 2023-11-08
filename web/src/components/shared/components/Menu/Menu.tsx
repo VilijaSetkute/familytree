@@ -1,5 +1,5 @@
 import { Box, ClickAwayListener } from '@mui/material';
-import { Notifications, Logout } from '@mui/icons-material';
+import { Notifications, Logout, Settings } from '@mui/icons-material';
 import React, { useContext, useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../../../../assets/icons/Logo_icon.svg';
 import { useTranslation } from 'react-i18next';
@@ -19,14 +19,16 @@ import Cookies from 'js-cookie';
 
 const Menu = () => {
   const { t } = useTranslation();
-  const { isAuthorized, user, setUser } = useContext(UserContext);
+  const { isAuthorized, userName, accountPermissions, setUser } = useContext(UserContext);
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(window.innerWidth >= 700);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const navigate = useNavigate();
 
+  const canAccessAdmin = accountPermissions === 'global_admin' || accountPermissions === 'admin';
+
   const logoutUser = () => {
     Cookies.remove('token');
-    setUser({ isAuthorized: false, user: undefined });
+    setUser({ isAuthorized: false, userName: undefined, accountPermissions: undefined, id: undefined });
     navigate('/paskyra/prisijungti');
   };
 
@@ -68,11 +70,17 @@ const Menu = () => {
                 <Box display="flex" alignItems="center">
                   {isAuthorized ? (
                     <Box display="flex" justifyItems="space-between" alignItems="center" marginRight="8px">
+                      {canAccessAdmin && (
+                        <Box marginRight="8px" sx={{ color: 'white' }} onClick={() => navigate('/admin')}>
+                          <Settings sx={{ fill: 'white', cursor: 'pointer' }} />
+                        </Box>
+                      )}
+
                       <Box marginRight="8px" sx={{ color: 'white' }}>
                         <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
                       </Box>
                       <Box marginRight="16px" sx={{ color: 'white' }}>
-                        {user}
+                        {userName}
                       </Box>
                       <Box>
                         <Logout sx={{ fill: 'white', cursor: 'pointer' }} onClick={logoutUser} />

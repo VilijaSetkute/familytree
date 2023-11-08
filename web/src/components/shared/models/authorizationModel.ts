@@ -14,10 +14,12 @@ export type CreateAccountForm = Omit<RegistrationForm, 'passwordConfirmation'> &
 
 export interface User {
   isAuthorized: boolean;
-  user: string | undefined;
+  id: string | undefined;
+  userName: string | undefined;
+  accountPermissions: string | undefined;
 }
 
 export interface UserResponse {
   status: boolean;
-  user: string | undefined;
+  user: undefined | User;
 }

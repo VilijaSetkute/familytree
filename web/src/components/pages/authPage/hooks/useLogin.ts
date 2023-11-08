@@ -42,9 +42,15 @@ export const useLogin = () => {
 
     if (data) {
       const authorization = await authApi.call(verifyUser());
+
       if (authorization.data?.status) {
         setTimeout(() => {
-          setUser({ isAuthorized: authorization.data?.status as boolean, user: authorization.data?.user });
+          setUser({
+            isAuthorized: authorization.data?.status as boolean,
+            userName: authorization.data?.user?.userName,
+            accountPermissions: authorization.data?.user?.accountPermissions,
+            id: authorization.data?.user?.id,
+          });
           navigate('/pagrindinis');
         }, 0);
       }
