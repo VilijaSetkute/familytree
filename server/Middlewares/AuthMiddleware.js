@@ -1,6 +1,7 @@
 const User = require("../Models/UserModel");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
+const _ = require("lodash");
 
 const regexOneLowerCase = /(?=.*[a-z])/;
 const regexOneUpperCase = /(?=.*[A-Z])/;
@@ -54,8 +55,19 @@ module.exports.UserVerification = (req, res) => {
       return res.json({ status: false });
     } else {
       const user = await User.findById(data.id);
-      if (user) return res.json({ status: true, user: user.userName });
-      else return res.json({ status: false });
+      if (user) {
+        const plainUser = user.toObject();
+        const { _id, ...userWithoutId } = plainUser;
+        const modifiedUserSchema = _.pick(userWithoutId, [
+          "userName",
+          "accountPermissions",
+        ]);
+
+        return res.json({
+          status: true,
+          user: { id: _id, ...modifiedUserSchema },
+        });
+      } else return res.json({ status: false });
     }
   });
 };
