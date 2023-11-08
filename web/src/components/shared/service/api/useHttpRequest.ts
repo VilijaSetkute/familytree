@@ -67,7 +67,10 @@ export async function httpRequest<T>(options: Partial<AxiosRequestConfig>): Prom
   let result = await axios({ ...options, baseURL: options.baseURL || baseURL, headers, withCredentials: true });
 
   if (result.status > 199 && result.status <= 299) {
-    result = { ...result, data: { data: result.data, message: null, didError: false, errorMessages: null } };
+    result = {
+      ...result,
+      data: { data: result.data.data ?? result.data, message: null, didError: false, errorMessages: null },
+    };
   } else {
     result = {
       ...result,
