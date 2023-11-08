@@ -31,5 +31,23 @@
   "page_no_content": {
     "text_main": "Sorry, but such page doesn't exist",
     "text_instruction": "Navigate to desired page or click \"Back\""
+  },
+  "admin": {
+    "users_table_header": {
+      "user": "User",
+      "email": "Email",
+      "date": "Date created",
+      "permission": "Permission",
+      "status": "Status",
+      "action": "Change status",
+      "delete": "Delete user"
+    },
+    "users_table_cell": {
+      "status_active": "Authorized",
+      "status_inactive": "Unauthorized",
+      "action_activate": "Activate",
+      "action_deactivate": "Deactivate",
+      "action_delete": "Delete"
+    }
   }
 }

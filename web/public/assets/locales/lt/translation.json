@@ -31,5 +31,23 @@
   "page_no_content": {
     "text_main": "Atsiprašome, bet toks puslapis neegzistuoja",
     "text_instruction": "Pasirinkite norimą puslapį arba spauskite naršyklėje mygtuką \"Atgal\" (\"Back\")"
+  },
+  "admin": {
+    "users_table_header": {
+      "user": "Vartotojas",
+      "email": "El. paštas",
+      "date": "Sukūrimo data",
+      "permission": "Leidimo lygis",
+      "status": "Statusas",
+      "action": "Keisti statusą",
+      "delete": "Trinti vartotoją"
+    },
+    "users_table_cell": {
+      "status_active": "Patvirtintas",
+      "status_inactive": "Nepatvirtintas",
+      "action_activate": "Patvirtinti",
+      "action_deactivate": "Deaktyvuoti",
+      "action_delete": "Trinti"
+    }
   }
 }
