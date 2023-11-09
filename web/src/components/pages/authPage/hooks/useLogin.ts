@@ -1,5 +1,5 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { LoginForm, UserResponse } from '../../../shared/models/authorizationModel';
+import { LoginForm, UserVerificationResponse } from '../../../shared/models/authorizationModel';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router-dom';
@@ -26,7 +26,7 @@ export const useLogin = () => {
   const { setUser } = useContext(UserContext);
 
   const loginApi = useHttpRequest<LoginForm>();
-  const authApi = useHttpRequest<UserResponse>();
+  const authApi = useHttpRequest<UserVerificationResponse>();
 
   const loginForm = useForm<LoginForm>({
     defaultValues: defaultValues,

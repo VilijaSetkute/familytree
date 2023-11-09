@@ -19,7 +19,20 @@ export interface User {
   accountPermissions: string | undefined;
 }
 
-export interface UserResponse {
+export interface UserVerificationResponse {
   status: boolean;
   user: undefined | User;
+}
+
+export interface UserResponse {
+  id: string;
+  userName: string;
+  email: string;
+  createdAt: string;
+  accountActivated: boolean;
+  accountPermissions: string;
+}
+
+export interface PermissionUpdate {
+  accountPermissions: string;
 }

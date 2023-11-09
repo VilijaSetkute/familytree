@@ -16,7 +16,7 @@ import Register from './components/pages/authPage/Register';
 import { useApiCall } from './service/useApiCall';
 import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
-import { User, UserResponse } from './components/shared/models/authorizationModel';
+import { User, UserVerificationResponse } from './components/shared/models/authorizationModel';
 import AdminPage from './components/pages/adminPage/AdminPage';
 
 function App() {
@@ -36,7 +36,7 @@ function App() {
     if (!token) {
       navigate('/paskyra/prisijungti');
     }
-    const { status, user } = await httpPost<UserResponse>('/', {});
+    const { status, user } = await httpPost<UserVerificationResponse>('/', {});
 
     const setAuthorized = () => {
       setUserStatus({
