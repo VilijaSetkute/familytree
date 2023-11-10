@@ -100,9 +100,18 @@ export const MenuCloseIcon = styled(Close)({
   display: 'none',
   margin: '8px 8px 0 0',
   color: colors.primaryGreen.green200,
+  fill: colors.white,
   fontSize: '32px',
   cursor: 'pointer',
   '@media (max-width: 700px)': {
     display: 'block',
   },
+});
+
+export const GreenDotBox = styled(Box)({
+  height: '8px',
+  width: '8px',
+  backgroundColor: colors.primaryGreen.green300,
+  borderRadius: '50%',
+  margin: '0 16px',
 });

@@ -10,6 +10,7 @@ import {
   MenuExpandIcon,
   MenuListContainer,
   MenuPositioning,
+  GreenDotBox,
 } from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 import StyledNavButton from './StyledNavButton';
@@ -52,9 +53,12 @@ const Menu = () => {
         <Box>
           <MenuContainer>
             <MenuPositioning>
-              <Link to="/">
-                <Logo width={50} />
-              </Link>
+              <Box display="flex" alignItems="center">
+                <Link to="/">
+                  <Logo width={50} />
+                </Link>
+                <MenuExpandIcon sx={{ fill: 'white', cursor: 'pointer' }} onClick={() => setIsMenuVisible(true)} />
+              </Box>
 
               <Box display="flex" alignItems="center">
                 <Box display="flex" alignItems="center">
@@ -67,21 +71,22 @@ const Menu = () => {
                   </MenuListContainer>
                 </Box>
 
-                <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" height={'100%'}>
                   {isAuthorized ? (
                     <Box display="flex" justifyItems="space-between" alignItems="center" marginRight="8px">
+                      {!isMobile && <GreenDotBox />}
+                      <Box marginRight="16px" sx={{ color: 'white' }}>
+                        {userName?.toUpperCase()}
+                      </Box>
+
+                      <Box marginRight="8px" sx={{ color: 'white' }}>
+                        <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
+                      </Box>
                       {canAccessAdmin && (
                         <Box marginRight="8px" sx={{ color: 'white' }} onClick={() => navigate('/admin')}>
                           <Settings sx={{ fill: 'white', cursor: 'pointer' }} />
                         </Box>
                       )}
-
-                      <Box marginRight="8px" sx={{ color: 'white' }}>
-                        <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
-                      </Box>
-                      <Box marginRight="16px" sx={{ color: 'white' }}>
-                        {userName}
-                      </Box>
                       <Box>
                         <Logout sx={{ fill: 'white', cursor: 'pointer' }} onClick={logoutUser} />
                       </Box>
@@ -92,7 +97,6 @@ const Menu = () => {
                     </Link>
                   )}
                   <LanguageSelector />
-                  <MenuExpandIcon sx={{ fill: 'white', cursor: 'pointer' }} onClick={() => setIsMenuVisible(true)} />
                 </Box>
               </Box>
             </MenuPositioning>
