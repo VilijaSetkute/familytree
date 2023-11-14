@@ -1,4 +1,4 @@
-import { Box, Tab, TableCell } from '@mui/material';
+import { Box, Tab, TableCell, Typography } from '@mui/material';
 import { colors } from '../../../config/theme/theme';
 // import { SxProps } from '@mui/system';
 import { styled } from '@mui/material/styles';
@@ -21,4 +21,10 @@ export const AdminTab = styled(Tab)({
 export const HeadTableCell = styled(TableCell)({
   color: colors.white,
   fontWeight: 600,
+});
+
+export const WarningTypography = styled(Typography)({
+  fontSize: '14px',
+  color: colors.error.error,
+  marginBottom: '8px',
 });
