@@ -13,16 +13,17 @@ import TreePage from './components/pages/treePage/TreePage';
 import Menu from './components/shared/components/Menu';
 import NoContentPage from './components/pages/noContentPage/NoContentPage';
 import Register from './components/pages/authPage/Register';
-import { useApiCall } from './service/useApiCall';
 import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
-import { User, UserVerificationResponse } from './components/shared/models/authorizationModel';
+import { User } from './components/shared/models/authorizationModel';
 import AdminPage from './components/pages/adminPage/AdminPage';
+import { socket } from './components/shared/webSocket/webSocketHelper';
+import { useHttpRequest } from './components/shared/service/api/useHttpRequest';
+import { verifyUser } from './components/shared/service/api/authorization.api';
 
-function App() {
+const App = () => {
   const { t } = useTranslation();
   const { isAuthorized, userName, accountPermissions, id } = useContext(UserContext);
-  const { httpPost } = useApiCall();
   const navigate = useNavigate();
   const [userStatus, setUserStatus] = useState<User>({
     isAuthorized,
@@ -30,26 +31,33 @@ function App() {
     accountPermissions,
     id,
   });
+  const verificationApi = useHttpRequest<User>();
 
   const verifyCookie = async () => {
     const token = Cookies.get('token');
     if (!token) {
       navigate('/paskyra/prisijungti');
     }
-    const { status, user } = await httpPost<UserVerificationResponse>('/', {});
+    const { success, data: user } = await verificationApi.call(verifyUser());
 
-    const setAuthorized = () => {
+    if (success) {
       setUserStatus({
-        isAuthorized: status,
+        isAuthorized: success,
         id: user?.id,
         userName: user?.userName,
         accountPermissions: user?.accountPermissions,
       });
-      navigate('/pagrindinis');
-    };
-
-    return status ? setAuthorized() : Cookies.remove('token');
+      navigate('/');
+    } else {
+      Cookies.remove('token');
+    }
   };
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      console.log(socket);
+    });
+  }, []);
 
   useEffect(() => {
     verifyCookie();
@@ -87,6 +95,6 @@ function App() {
       </Box>
     </UserContext.Provider>
   );
-}
+};
 
 export default App;
