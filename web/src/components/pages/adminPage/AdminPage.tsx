@@ -202,7 +202,12 @@ const AdminPage = () => {
                                     : colors.primaryGreen.green600,
                                 },
                               }}
-                              onClick={() => manageUser('activate', row.id)}
+                              onClick={() =>
+                                manageUser('activate', row.id, {
+                                  isActive: row.accountActivated,
+                                  userName: row.userName,
+                                })
+                              }
                             >
                               {row.accountActivated
                                 ? t('admin.users_table_cell.action_deactivate')
