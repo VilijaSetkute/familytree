@@ -1,13 +1,19 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
 const cookieParser = require("cookie-parser");
-const authRoute = require("./Routes/AuthRoute");
-const { MONGO_URL, PORT } = process.env;
 const bodyParser = require("body-parser");
+const authRoute = require("./Routes/AuthRoute");
+const { createServer } = require("http");
+const { Server } = require("socket.io");
+require("dotenv").config();
 
-console.log(MONGO_URL, PORT);
+const { MONGO_URL, PORT, PUBLIC_CLIENT_URL, LOCAL_CLIENT_URL, PRODUCTION } =
+  process.env;
+const originUrl =
+  String(PRODUCTION) === "true"
+    ? String(PUBLIC_CLIENT_URL)
+    : String(LOCAL_CLIENT_URL);
 
 const app = express();
 
@@ -19,50 +25,55 @@ mongoose
   .then(() => console.log("MongoDB is  connected successfully"))
   .catch((err) => console.error(err));
 
-const publicOrigin = "http://104.248.192.185:4000";
-const localOrigin = "http://localhost:4000";
-const production = false;
-const origin = production ? publicOrigin : localOrigin;
+// Middleware setup
+app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser.json());
+
+app.use(
+  cors({
+    origin: originUrl,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
+    credentials: true,
+  })
+);
 
 app.use((req, res, next) => {
-  // Website you wish to allow to connect
-  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
-  // res.setHeader("Access-Control-Allow-Origin", "http://localhost:");
-  // res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Origin", origin);
-  // Request methods you wish to allow
+  res.setHeader("Access-Control-Allow-Origin", originUrl);
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
-  // Request headers you wish to allow
   res.setHeader(
     "Access-Control-Allow-Headers",
     "X-Requested-With,content-type"
   );
-  // Set to true if you need the website to include cookies in the requests sent
-  // to the API (e.g. in case you use sessions)
   res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 
-app.use(express.json());
-
-app.use(
-  cors({
-    origin: origin,
+const httpServer = createServer(app);
+const io = new Server(httpServer, {
+  cors: {
+    origin: originUrl,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
-    credentials: true,
-    origin: origin,
-  })
-);
-
-app.use(cookieParser());
-
-app.use(bodyParser.json());
+  },
+});
 
 app.use("/", authRoute);
 
-app.listen(PORT, () => {
+io.on("connection", (socket) => {
+  console.log("someone has connected to", socket.id);
+
+  socket.on("user_activated", (data) => {
+    console.log(data);
+  });
+
+  socket.on("disconnect", () => {
+    console.log("socket disconnected");
+  });
+});
+
+httpServer.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
