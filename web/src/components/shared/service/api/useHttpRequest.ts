@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 const production = process.env.REACT_APP_PRODUCTION === 'true';
-const baseURL = production ? process.env.REACT_APP_PUBLIC_URL : process.env.REACT_APP_LOCAL_URL;
+const baseURL = production ? process.env.REACT_APP_PUBLIC_SERVER_URL : process.env.REACT_APP_LOCAL_SERVER_URL;
 
 interface ResponseWrapper<T> {
   data: T | null;
