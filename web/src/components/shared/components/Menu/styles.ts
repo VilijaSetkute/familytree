@@ -115,3 +115,20 @@ export const GreenDotBox = styled(Box)({
   borderRadius: '50%',
   margin: '0 16px',
 });
+
+export const NotificationCountBox = styled(Box)({
+  color: colors.white,
+  backgroundColor: colors.error.error,
+  zIndex: 1,
+  fontSize: '12px',
+  width: '10px',
+  height: '10px',
+  padding: '5px',
+  borderRadius: '50%',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'absolute',
+  top: '-5px',
+  right: '-5px',
+});

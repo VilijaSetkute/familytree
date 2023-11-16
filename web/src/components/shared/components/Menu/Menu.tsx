@@ -11,6 +11,7 @@ import {
   MenuListContainer,
   MenuPositioning,
   GreenDotBox,
+  NotificationCountBox,
 } from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 import StyledNavButton from './StyledNavButton';
@@ -24,8 +25,12 @@ const Menu = () => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(window.innerWidth >= 700);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [notificationCount, setNotificationCount] = useState<number | null>(3);
+  const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
 
   const canAccessAdmin = accountPermissions === 'global_admin' || accountPermissions === 'admin';
+
+  console.log('canAccessAdmin', canAccessAdmin, 'isAuthorized', isAuthorized);
 
   const logoutUser = () => {
     Cookies.remove('token');
@@ -45,6 +50,13 @@ const Menu = () => {
 
   const handleMenuItem = () => {
     setIsMenuVisible(!isMobile);
+  };
+
+  const handleNotifications = () => {
+    if (isNotificationOpen) {
+      setNotificationCount(null);
+    }
+    setIsNotificationOpen(!isNotificationOpen);
   };
 
   return (
@@ -79,8 +91,38 @@ const Menu = () => {
                         {userName?.toUpperCase()}
                       </Box>
 
-                      <Box marginRight="8px" sx={{ color: 'white' }}>
-                        <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
+                      <Box marginRight="16px" sx={{ color: 'white', position: 'relative', cursor: 'pointer' }}>
+                        <Notifications sx={{ fill: 'white', cursor: 'pointer' }} onClick={handleNotifications} />
+                        {!!notificationCount && <NotificationCountBox>{notificationCount}</NotificationCountBox>}
+                        {isNotificationOpen && (
+                          <Box
+                            display="flex"
+                            flexDirection="column"
+                            position="absolute"
+                            sx={{
+                              borderRadius: '8px',
+                              backgroundColor: 'white',
+                              padding: '12px',
+                              right: 0,
+                              width: '200px',
+                              textAlign: 'left',
+                            }}
+                          >
+                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
+                              testas testas testas testas
+                            </Box>
+                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
+                              testas testas
+                            </Box>
+                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
+                              testas
+                            </Box>
+                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
+                              testas testas testas
+                            </Box>
+                            <Box padding="4px">testas</Box>
+                          </Box>
+                        )}
                       </Box>
                       {canAccessAdmin && (
                         <Box marginRight="8px" sx={{ color: 'white' }} onClick={() => navigate('/admin')}>
