@@ -49,5 +49,8 @@
       "action_deactivate": "Deaktyvuoti",
       "action_delete": "Trinti"
     }
+  },
+  "notifications": {
+    "new_user": "{{userName}} ką tik prisijungė prie projekto"
   }
 }

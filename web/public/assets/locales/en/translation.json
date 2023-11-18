@@ -49,5 +49,8 @@
       "action_deactivate": "Deactivate",
       "action_delete": "Delete"
     }
+  },
+  "notifications": {
+    "new_user": "{{userName}} has just joined to the family tree"
   }
 }
