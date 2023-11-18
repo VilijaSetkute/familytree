@@ -18,6 +18,14 @@ import StyledNavButton from './StyledNavButton';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { UserContext } from '../../../../utils/context/userContext';
 import Cookies from 'js-cookie';
+import Notification from './Notification';
+
+const testMsg = [
+  'This is a test 1',
+  'test 2',
+  'some longer text to test kjgjg kjgljgljg  kjgjgjg kjgkjg',
+  'this time ok',
+];
 
 const Menu = () => {
   const { t } = useTranslation();
@@ -25,8 +33,8 @@ const Menu = () => {
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(window.innerWidth >= 700);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const navigate = useNavigate();
-  const [notificationCount, setNotificationCount] = useState<number | null>(3);
   const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
+  const [messages, setMessages] = useState<string[]>(testMsg);
 
   const canAccessAdmin = accountPermissions === 'global_admin' || accountPermissions === 'admin';
 
@@ -52,7 +60,7 @@ const Menu = () => {
 
   const handleNotifications = () => {
     if (isNotificationOpen) {
-      setNotificationCount(null);
+      setMessages(() => []);
     }
     setIsNotificationOpen(!isNotificationOpen);
   };
@@ -92,36 +100,10 @@ const Menu = () => {
                       <Box marginRight="16px" sx={{ color: 'white', position: 'relative', cursor: 'pointer' }}>
                         <Box onClick={handleNotifications}>
                           <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
-                          {!!notificationCount && <NotificationCountBox>{notificationCount}</NotificationCountBox>}
+                          {!!messages.length && <NotificationCountBox>{messages.length}</NotificationCountBox>}
                         </Box>
                         {isNotificationOpen && (
-                          <Box
-                            display="flex"
-                            flexDirection="column"
-                            position="absolute"
-                            sx={{
-                              borderRadius: '8px',
-                              backgroundColor: 'white',
-                              padding: '12px',
-                              right: 0,
-                              width: '200px',
-                              textAlign: 'left',
-                            }}
-                          >
-                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
-                              testas testas testas testas
-                            </Box>
-                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
-                              testas testas
-                            </Box>
-                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
-                              testas
-                            </Box>
-                            <Box padding="4px" sx={{ borderBottom: '1px solid gray' }}>
-                              testas testas testas
-                            </Box>
-                            <Box padding="4px">testas</Box>
-                          </Box>
+                          <Notification messages={messages} setIsNotificationOpen={handleNotifications} />
                         )}
                       </Box>
                       {canAccessAdmin && (
