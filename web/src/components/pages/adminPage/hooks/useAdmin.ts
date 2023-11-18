@@ -9,6 +9,7 @@ import {
 import { UserResponse } from '../../../shared/models/authorizationModel';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
+import { SocketProp } from '../../../shared/models/websocketModel';
 
 export interface Option {
   value: string;
@@ -22,8 +23,6 @@ export interface UserData {
 }
 
 type AccessData = Option | Option[] | null;
-
-type SocketProp = Socket<DefaultEventsMap, DefaultEventsMap> | null;
 
 export const useAdmin = (socket: SocketProp) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

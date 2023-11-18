@@ -21,9 +21,10 @@ import Cookies from 'js-cookie';
 import Notification from './Notification';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
+import { SocketProp } from '../../models/websocketModel';
 
 interface Props {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap> | null;
+  socket: SocketProp;
 }
 
 const Menu: React.FC<Props> = ({ socket }) => {

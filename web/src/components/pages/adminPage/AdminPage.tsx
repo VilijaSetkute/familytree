@@ -11,6 +11,7 @@ import Select from 'react-select';
 import { UserContext } from '../../../utils/context/userContext';
 import { Socket } from 'socket.io-client';
 import { DefaultEventsMap } from '@socket.io/component-emitter';
+import { SocketProp } from '../../shared/models/websocketModel';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -48,7 +49,7 @@ const a11yProps = (index: number) => {
 };
 
 interface Props {
-  socket: Socket<DefaultEventsMap, DefaultEventsMap> | null;
+  socket: SocketProp;
 }
 
 const AdminPage: React.FC<Props> = ({ socket }) => {

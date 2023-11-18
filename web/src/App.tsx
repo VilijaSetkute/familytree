@@ -17,17 +17,16 @@ import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
 import { UserVerificationResponse, User } from './components/shared/models/authorizationModel';
 import AdminPage from './components/pages/adminPage/AdminPage';
-import { socketOrigin } from './components/shared/webSocket/webSocketHelper';
 import { useHttpRequest } from './components/shared/service/api/useHttpRequest';
 import { verifyUser } from './components/shared/service/api/authorization.api';
-import io, { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from '@socket.io/component-emitter';
+import io from 'socket.io-client';
+import { SocketProp, socketOrigin } from './components/shared/models/websocketModel';
 
 const App = () => {
   const { t } = useTranslation();
   const { accountActivated, userName, accountPermissions, id } = useContext(UserContext);
   const navigate = useNavigate();
-  const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
+  const [socket, setSocket] = useState<SocketProp>(null);
   const [userStatus, setUserStatus] = useState<User>({
     accountActivated,
     userName,
