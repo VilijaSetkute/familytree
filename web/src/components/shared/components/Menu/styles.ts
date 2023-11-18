@@ -132,3 +132,27 @@ export const NotificationCountBox = styled(Box)({
   top: '-5px',
   right: '-5px',
 });
+
+export const NotificationContainerBox = styled(Box)({
+  position: 'absolute',
+  display: 'flex',
+  flexDirection: 'column',
+  borderRadius: '8px',
+  backgroundColor: 'white',
+  padding: '12px',
+  right: 0,
+  minWidth: '200px',
+  textAlign: 'left',
+  overflow: 'scroll',
+  maxHeight: '200px',
+  zIndex: 99,
+  boxShadow: '0 0 10px gray',
+});
+
+export const SingleNotificationBox = styled(Box)({
+  padding: '8px 4px',
+  borderBottom: '1px solid gray',
+  '&:last-of-type': {
+    borderBottom: 'none',
+  },
+});
