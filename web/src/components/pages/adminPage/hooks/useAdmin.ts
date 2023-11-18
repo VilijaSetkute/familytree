@@ -7,7 +7,8 @@ import {
   updateUsersPermission,
 } from '../../../shared/service/api/users.api';
 import { UserResponse } from '../../../shared/models/authorizationModel';
-import { socket } from '../../../shared/webSocket/webSocketHelper';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 
 export interface Option {
   value: string;
@@ -22,7 +23,9 @@ export interface UserData {
 
 type AccessData = Option | Option[] | null;
 
-export const useAdmin = () => {
+type SocketProp = Socket<DefaultEventsMap, DefaultEventsMap> | null;
+
+export const useAdmin = (socket: SocketProp) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const usersApi = useHttpRequest<UserResponse[]>();
   const manageApi = useHttpRequest();
@@ -43,7 +46,12 @@ export const useAdmin = () => {
     if (action === 'delete') await manageApi.call(deleteSingleUser(id));
     if (action === 'activate' && isUserData) {
       await manageApi.call(activateUser(id));
-      !data.isActive && socket.emit('user_activated', { message: `User ${data.userName} has just joined` });
+      !data.isActive &&
+        socket &&
+        socket.emit('user_activated', {
+          userName: data.userName,
+          id,
+        });
     }
     if (action === 'update' && isAccessData) {
       await manageApi.call(updateUsersPermission(id, { accountPermissions: data?.value as string }));

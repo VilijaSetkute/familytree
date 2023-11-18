@@ -9,6 +9,8 @@ import { lt, enGB } from 'date-fns/locale';
 import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { UserContext } from '../../../utils/context/userContext';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -45,8 +47,12 @@ const a11yProps = (index: number) => {
   };
 };
 
-const AdminPage = () => {
-  const { users, manageUser, loading } = useAdmin();
+interface Props {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap> | null;
+}
+
+const AdminPage: React.FC<Props> = ({ socket }) => {
+  const { users, manageUser, loading } = useAdmin(socket);
   const [value, setValue] = React.useState(0);
   const { t, i18n } = useTranslation();
   const currentLanguage = i18n.language;

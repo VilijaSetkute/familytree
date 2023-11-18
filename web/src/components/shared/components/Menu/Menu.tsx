@@ -19,24 +19,33 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { UserContext } from '../../../../utils/context/userContext';
 import Cookies from 'js-cookie';
 import Notification from './Notification';
+import { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 
-const testMsg = [
-  'This is a test 1',
-  'test 2',
-  'some longer text to test kjgjg kjgljgljg  kjgjgjg kjgkjg',
-  'this time ok',
-];
+interface Props {
+  socket: Socket<DefaultEventsMap, DefaultEventsMap> | null;
+}
 
-const Menu = () => {
+const Menu: React.FC<Props> = ({ socket }) => {
   const { t } = useTranslation();
   const { accountActivated, userName, accountPermissions, setUser } = useContext(UserContext);
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(window.innerWidth >= 700);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const navigate = useNavigate();
   const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
-  const [messages, setMessages] = useState<string[]>(testMsg);
+  const [messages, setMessages] = useState<string[]>([]);
 
   const canAccessAdmin = accountPermissions === 'global_admin' || accountPermissions === 'admin';
+
+  useEffect(() => {
+    console.log(socket);
+    if (socket) {
+      socket.on('newUser', (data) => {
+        const message = t('notifications.new_user', { userName: data.userName });
+        setMessages((prev) => [...prev, message]);
+      });
+    }
+  }, [socket]);
 
   const logoutUser = () => {
     Cookies.remove('token');

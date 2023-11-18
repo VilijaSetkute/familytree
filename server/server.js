@@ -66,7 +66,7 @@ io.on("connection", (socket) => {
   console.log("someone has connected to", socket.id);
 
   socket.on("user_activated", (data) => {
-    console.log(data);
+    io.emit("newUser", data);
   });
 
   socket.on("disconnect", () => {

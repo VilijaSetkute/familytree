@@ -17,14 +17,17 @@ import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
 import { UserVerificationResponse, User } from './components/shared/models/authorizationModel';
 import AdminPage from './components/pages/adminPage/AdminPage';
-import { socket } from './components/shared/webSocket/webSocketHelper';
+import { socketOrigin } from './components/shared/webSocket/webSocketHelper';
 import { useHttpRequest } from './components/shared/service/api/useHttpRequest';
 import { verifyUser } from './components/shared/service/api/authorization.api';
+import io, { Socket } from 'socket.io-client';
+import { DefaultEventsMap } from '@socket.io/component-emitter';
 
 const App = () => {
   const { t } = useTranslation();
   const { accountActivated, userName, accountPermissions, id } = useContext(UserContext);
   const navigate = useNavigate();
+  const [socket, setSocket] = useState<Socket<DefaultEventsMap, DefaultEventsMap> | null>(null);
   const [userStatus, setUserStatus] = useState<User>({
     accountActivated,
     userName,
@@ -32,6 +35,11 @@ const App = () => {
     id,
   });
   const verificationApi = useHttpRequest<UserVerificationResponse>();
+
+  useEffect(() => {
+    const socketTest = io(socketOrigin as string);
+    setSocket(socketTest);
+  }, []);
 
   const verifyCookie = async () => {
     const token = Cookies.get('token');
@@ -54,9 +62,11 @@ const App = () => {
   };
 
   useEffect(() => {
-    socket.on('connect', () => {
-      console.log(socket);
-    });
+    if (socket) {
+      socket.on('connect', () => {
+        console.log(socket);
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -78,7 +88,7 @@ const App = () => {
       }}
     >
       <Box className="App">
-        <Menu />
+        <Menu socket={socket} />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/pagrindinis" element={<HomePage />} />
@@ -88,7 +98,7 @@ const App = () => {
           <Route path="/vietoves" element={<LocationsPage />} />
           <Route path="/medis" element={<TreePage />} />
 
-          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin" element={<AdminPage socket={socket} />} />
 
           <Route path="*" element={<NoContentPage />} />
         </Routes>
