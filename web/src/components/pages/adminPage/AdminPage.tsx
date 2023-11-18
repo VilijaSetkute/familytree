@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ContentContainerPaper } from '../../shared/styledComponents/paper.styles';
 import { Box, Tabs, CircularProgress } from '@mui/material';
-import { AdminTab, WarningTypography } from './styles';
+import { AdminTab, WarningTypography, TableContainerBox } from './styles';
 import { useAdmin } from './hooks/useAdmin';
 import { useTranslation } from 'react-i18next';
 import { SocketProp } from '../../shared/models/websocketModel';
@@ -90,12 +90,12 @@ const AdminPage: React.FC<Props> = ({ socket }) => {
             <CircularProgress />
           ) : (
             <Box sx={{ overflow: 'auto' }}>
-              <Box sx={{ width: '100%', display: 'table', tableLayout: 'fixed' }}>
+              <TableContainerBox>
                 {isMobile && (
                   <WarningTypography>You are using smaller screen, please use bigger screen device.</WarningTypography>
                 )}
                 <AdminTable tableColumns={tableColumns} users={users} options={options} manageUser={manageUser} />
-              </Box>
+              </TableContainerBox>
             </Box>
           )}
         </CustomTabPanel>

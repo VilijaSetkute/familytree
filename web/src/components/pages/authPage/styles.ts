@@ -48,3 +48,9 @@ export const InputField = styled(Input)({
     '-webkit-box-shadow': '0 0 0 1000px white inset',
   },
 });
+
+export const DividerBox = styled(Box)({
+  color: 'grey',
+  fontWeight: 400,
+  textTransform: 'lowercase',
+});

@@ -12,6 +12,7 @@ import {
   MenuPositioning,
   GreenDotBox,
   NotificationCountBox,
+  styles,
 } from './styles';
 import { Link, useNavigate } from 'react-router-dom';
 import StyledNavButton from './StyledNavButton';
@@ -82,7 +83,7 @@ const Menu: React.FC<Props> = ({ socket }) => {
                 <Link to="/">
                   <Logo width={50} />
                 </Link>
-                <MenuExpandIcon sx={{ fill: 'white', cursor: 'pointer' }} onClick={() => setIsMenuVisible(true)} />
+                <MenuExpandIcon sx={styles.whiteFill} onClick={() => setIsMenuVisible(true)} />
               </Box>
 
               <Box display="flex" alignItems="center">
@@ -100,13 +101,16 @@ const Menu: React.FC<Props> = ({ socket }) => {
                   {accountActivated ? (
                     <Box display="flex" justifyItems="space-between" alignItems="center" marginRight="8px">
                       {!isMobile && <GreenDotBox />}
-                      <Box marginRight="16px" sx={{ color: 'white' }}>
+                      <Box marginRight="8px" sx={{ color: 'white' }}>
                         {userName?.toUpperCase()}
                       </Box>
 
-                      <Box marginRight="16px" sx={{ color: 'white', position: 'relative', cursor: 'pointer' }}>
+                      <Box
+                        marginRight={messages.length ? '16px' : '8px'}
+                        sx={{ color: 'white', position: 'relative', cursor: 'pointer' }}
+                      >
                         <Box onClick={handleNotifications}>
-                          <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
+                          <Notifications sx={styles.whiteFill} />
                           {!!messages.length && <NotificationCountBox>{messages.length}</NotificationCountBox>}
                         </Box>
                         {isNotificationOpen && (
@@ -115,11 +119,11 @@ const Menu: React.FC<Props> = ({ socket }) => {
                       </Box>
                       {canAccessAdmin && (
                         <Box marginRight="8px" sx={{ color: 'white' }} onClick={() => navigate('/admin')}>
-                          <Settings sx={{ fill: 'white', cursor: 'pointer' }} />
+                          <Settings sx={styles.whiteFill} />
                         </Box>
                       )}
                       <Box>
-                        <Logout sx={{ fill: 'white', cursor: 'pointer' }} onClick={logoutUser} />
+                        <Logout sx={styles.whiteFill} onClick={logoutUser} />
                       </Box>
                     </Box>
                   ) : (

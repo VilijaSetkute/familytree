@@ -28,6 +28,12 @@ export const WarningTypography = styled(Typography)({
   marginBottom: '8px',
 });
 
+export const TableContainerBox = styled(Box)({
+  width: '100%',
+  display: 'table',
+  tableLayout: 'fixed',
+});
+
 export const CustomTableRow = styled(TableRow)<{ isDisabled: boolean }>(({ isDisabled }) => ({
   '&:last-child td, &:last-child th': { border: 0 },
   pointerEvents: isDisabled ? 'none' : 'unset',

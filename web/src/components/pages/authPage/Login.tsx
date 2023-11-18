@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AuthCard, CenteredContainer, InputField, styles } from './styles';
+import { AuthCard, CenteredContainer, InputField, styles, DividerBox } from './styles';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, IconButton, InputAdornment } from '@mui/material';
 import { AccountCircle, Visibility, VisibilityOff } from '@mui/icons-material';
@@ -88,9 +88,7 @@ const Login = () => {
           />
         </form>
         <Divider sx={{ my: '16px' }}>
-          <Box sx={{ color: 'grey', fontWeight: 400, textTransform: 'lowercase' }}>
-            {t('authorization.login_divider')}
-          </Box>
+          <DividerBox>{t('authorization.login_divider')}</DividerBox>
         </Divider>
         <Link to={'/paskyra/registruotis'} style={{ pointerEvents: loading ? 'none' : undefined }}>
           <CustomButton

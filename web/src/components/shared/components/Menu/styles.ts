@@ -10,6 +10,10 @@ export const styles = {
     alignItems: 'center',
     textDecoration: 'none',
   },
+  whiteFill: {
+    fill: 'white',
+    cursor: 'pointer',
+  },
 };
 
 export const MenuContainer = styled(Box)({
