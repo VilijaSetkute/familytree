@@ -64,7 +64,7 @@ const App = () => {
   useEffect(() => {
     if (socket) {
       socket.on('connect', () => {
-        console.log(socket);
+        // Intentionally left empty
       });
     }
   }, []);

@@ -1,6 +1,6 @@
+import React, { useContext, useEffect, useState } from 'react';
 import { Box, ClickAwayListener } from '@mui/material';
 import { Notifications, Logout, Settings } from '@mui/icons-material';
-import React, { useContext, useEffect, useState } from 'react';
 import { ReactComponent as Logo } from '../../../../assets/icons/Logo_icon.svg';
 import { useTranslation } from 'react-i18next';
 import {
@@ -38,7 +38,6 @@ const Menu: React.FC<Props> = ({ socket }) => {
   const canAccessAdmin = accountPermissions === 'global_admin' || accountPermissions === 'admin';
 
   useEffect(() => {
-    console.log(socket);
     if (socket) {
       socket.on('newUser', (data) => {
         const message = t('notifications.new_user', { userName: data.userName });
