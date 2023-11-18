@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './App.css';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
@@ -66,11 +66,11 @@ const App = () => {
         // Intentionally left empty
       });
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     verifyCookie();
-  }, []);
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     document.title = t('app_title');
