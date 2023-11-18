@@ -10,6 +10,13 @@ export interface Option {
   isDisabled: boolean;
 }
 
+export interface UserData {
+  isActive: boolean;
+  userName: string;
+}
+
+export type AccessData = Option | Option[] | null;
+
 export const tabs = [
   { tabId: 0, tabName: 'Users' },
   { tabId: 1, tabName: 'Gallery' },

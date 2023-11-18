@@ -8,19 +8,7 @@ import {
 } from '../../../shared/service/api/users.api';
 import { UserResponse } from '../../../shared/models/authorizationModel';
 import { SocketProp } from '../../../shared/models/websocketModel';
-
-export interface Option {
-  value: string;
-  label: string;
-  isDisabled: boolean;
-}
-
-export interface UserData {
-  isActive: boolean;
-  userName: string;
-}
-
-type AccessData = Option | Option[] | null;
+import { AccessData, UserData } from '../../../shared/models/adminModel';
 
 export const useAdmin = (socket: SocketProp) => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

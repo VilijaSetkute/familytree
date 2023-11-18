@@ -8,15 +8,7 @@ import { useTranslation } from 'react-i18next';
 import Select from 'react-select';
 import { UserContext } from '../../../utils/context/userContext';
 import { UserResponse } from '../../shared/models/authorizationModel';
-import { UserData } from './hooks/useAdmin';
-
-type AccessData = Option | Option[] | null;
-
-export interface Option {
-  value: string;
-  label: string;
-  isDisabled: boolean;
-}
+import { AccessData, Option, UserData } from '../../shared/models/adminModel';
 
 interface TableProps {
   tableColumns: { title: string }[];
