@@ -7,14 +7,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../../../utils/context/userContext';
 import { useHttpRequest } from '../../../shared/service/api/useHttpRequest';
 import { login, verifyUser } from '../../../shared/service/api/authorization.api';
-
-const EMAIL_REGX =
-  /^(([^<>()[\]\\.,;:\s@"]+(.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-
-const defaultValues = {
-  email: '',
-  password: '',
-};
+import { EMAIL_REGX, defaultLoginValues } from '../../../shared/models/authorizationModel';
 
 const validationSchema = yup.object().shape({
   email: yup.string().required('Please provide email').matches(EMAIL_REGX, 'Invalid email address'),
@@ -29,7 +22,7 @@ export const useLogin = () => {
   const authApi = useHttpRequest<UserVerificationResponse>();
 
   const loginForm = useForm<LoginForm>({
-    defaultValues: defaultValues,
+    defaultValues: defaultLoginValues,
     mode: 'onBlur',
     shouldFocusError: true,
     shouldUnregister: false,

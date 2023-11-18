@@ -6,16 +6,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { RegistrationForm, CreateAccountForm } from '../../../shared/models/authorizationModel';
 import { useHttpRequest } from '../../../shared/service/api/useHttpRequest';
 import { register } from '../../../shared/service/api/authorization.api';
-
-const EMAIL_REGX =
-  /^(([^<>()[\]\\.,;:\s@"]+(.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
-
-const defaultValues = {
-  userName: '',
-  email: '',
-  password: '',
-  passwordConfirmation: '',
-};
+import { EMAIL_REGX, defaultRegisterValues } from '../../../shared/models/authorizationModel';
 
 const validationSchema = yup.object().shape({
   userName: yup.string().required('Please provide a user name'),
@@ -34,7 +25,7 @@ export const useRegister = () => {
   const registerApi = useHttpRequest<RegistrationForm>();
 
   const registrationForm = useForm<RegistrationForm>({
-    defaultValues: defaultValues,
+    defaultValues: defaultRegisterValues,
     mode: 'onBlur',
     shouldFocusError: true,
     shouldUnregister: false,

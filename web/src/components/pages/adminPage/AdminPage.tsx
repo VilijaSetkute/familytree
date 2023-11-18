@@ -5,7 +5,18 @@ import { AdminTab, WarningTypography } from './styles';
 import { useAdmin } from './hooks/useAdmin';
 import { useTranslation } from 'react-i18next';
 import { SocketProp } from '../../shared/models/websocketModel';
-import { TabPanelProps, tabs, options } from '../../shared/models/adminModel';
+import {
+  TabPanelProps,
+  tabs,
+  options,
+  ADMIN_USER,
+  ADMIN_EMAIL,
+  ADMIN_DATE,
+  ADMIN_PERMISSION,
+  ADMIN_STATUS,
+  ADMIN_ACTION,
+  ADMIN_DELETE,
+} from '../../shared/models/adminModel';
 import AdminTable from './AdminTable';
 
 const CustomTabPanel = (props: TabPanelProps) => {
@@ -42,13 +53,13 @@ const AdminPage: React.FC<Props> = ({ socket }) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const tableColumns = [
-    { title: t('admin.users_table_header.user') },
-    { title: t('admin.users_table_header.email') },
-    { title: t('admin.users_table_header.date') },
-    { title: t('admin.users_table_header.permission') },
-    { title: t('admin.users_table_header.status') },
-    { title: t('admin.users_table_header.action') },
-    { title: t('admin.users_table_header.delete') },
+    { title: t(ADMIN_USER) },
+    { title: t(ADMIN_EMAIL) },
+    { title: t(ADMIN_DATE) },
+    { title: t(ADMIN_PERMISSION) },
+    { title: t(ADMIN_STATUS) },
+    { title: t(ADMIN_ACTION) },
+    { title: t(ADMIN_DELETE) },
   ];
 
   const updateScreenWidth = () => {
