@@ -1,14 +1,14 @@
 import { createContext } from 'react';
 
 interface User {
-  isAuthorized: boolean;
+  accountActivated: boolean | undefined;
   id: string | undefined;
   userName: string | undefined;
   accountPermissions: string | undefined;
 }
 
 interface UserContext {
-  isAuthorized: boolean;
+  accountActivated: boolean | undefined;
   id: string | undefined;
   userName: string | undefined;
   accountPermissions: string | undefined;
@@ -16,7 +16,7 @@ interface UserContext {
 }
 
 export const UserContext = createContext<UserContext>({
-  isAuthorized: false,
+  accountActivated: false,
   id: undefined,
   userName: undefined,
   accountPermissions: undefined,

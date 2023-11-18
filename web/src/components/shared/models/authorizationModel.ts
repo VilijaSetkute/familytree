@@ -13,7 +13,7 @@ export interface RegistrationForm {
 export type CreateAccountForm = Omit<RegistrationForm, 'passwordConfirmation'> & { createdAt: string };
 
 export interface User {
-  isAuthorized: boolean;
+  accountActivated: boolean | undefined;
   id: string | undefined;
   userName: string | undefined;
   accountPermissions: string | undefined;

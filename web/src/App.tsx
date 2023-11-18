@@ -15,7 +15,7 @@ import NoContentPage from './components/pages/noContentPage/NoContentPage';
 import Register from './components/pages/authPage/Register';
 import Cookies from 'js-cookie';
 import { UserContext } from './utils/context/userContext';
-import { User } from './components/shared/models/authorizationModel';
+import { UserVerificationResponse, User } from './components/shared/models/authorizationModel';
 import AdminPage from './components/pages/adminPage/AdminPage';
 import { socket } from './components/shared/webSocket/webSocketHelper';
 import { useHttpRequest } from './components/shared/service/api/useHttpRequest';
@@ -23,29 +23,29 @@ import { verifyUser } from './components/shared/service/api/authorization.api';
 
 const App = () => {
   const { t } = useTranslation();
-  const { isAuthorized, userName, accountPermissions, id } = useContext(UserContext);
+  const { accountActivated, userName, accountPermissions, id } = useContext(UserContext);
   const navigate = useNavigate();
   const [userStatus, setUserStatus] = useState<User>({
-    isAuthorized,
+    accountActivated,
     userName,
     accountPermissions,
     id,
   });
-  const verificationApi = useHttpRequest<User>();
+  const verificationApi = useHttpRequest<UserVerificationResponse>();
 
   const verifyCookie = async () => {
     const token = Cookies.get('token');
     if (!token) {
       navigate('/paskyra/prisijungti');
     }
-    const { success, data: user } = await verificationApi.call(verifyUser());
+    const { success, data } = await verificationApi.call(verifyUser());
 
-    if (success) {
+    if (success && data?.status) {
       setUserStatus({
-        isAuthorized: success,
-        id: user?.id,
-        userName: user?.userName,
-        accountPermissions: user?.accountPermissions,
+        accountActivated: data.user?.accountActivated,
+        id: data.user?.id,
+        userName: data.user?.userName,
+        accountPermissions: data.user?.accountPermissions,
       });
       navigate('/');
     } else {
@@ -70,7 +70,7 @@ const App = () => {
   return (
     <UserContext.Provider
       value={{
-        isAuthorized: userStatus.isAuthorized,
+        accountActivated: userStatus.accountActivated,
         id: userStatus.id,
         userName: userStatus.userName,
         accountPermissions: userStatus.accountPermissions,

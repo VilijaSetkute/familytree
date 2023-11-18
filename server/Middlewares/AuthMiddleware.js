@@ -61,6 +61,7 @@ module.exports.UserVerification = (req, res) => {
         const modifiedUserSchema = _.pick(userWithoutId, [
           "userName",
           "accountPermissions",
+          "accountActivated",
         ]);
 
         return res.json({

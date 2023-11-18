@@ -46,7 +46,7 @@ export const useLogin = () => {
       if (authorization.data?.status) {
         setTimeout(() => {
           setUser({
-            isAuthorized: authorization.data?.status as boolean,
+            accountActivated: authorization.data?.status as boolean,
             userName: authorization.data?.user?.userName,
             accountPermissions: authorization.data?.user?.accountPermissions,
             id: authorization.data?.user?.id,

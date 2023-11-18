@@ -21,7 +21,7 @@ import Cookies from 'js-cookie';
 
 const Menu = () => {
   const { t } = useTranslation();
-  const { isAuthorized, userName, accountPermissions, setUser } = useContext(UserContext);
+  const { accountActivated, userName, accountPermissions, setUser } = useContext(UserContext);
   const [isMenuVisible, setIsMenuVisible] = useState<boolean>(window.innerWidth >= 700);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const navigate = useNavigate();
@@ -30,11 +30,9 @@ const Menu = () => {
 
   const canAccessAdmin = accountPermissions === 'global_admin' || accountPermissions === 'admin';
 
-  console.log('canAccessAdmin', canAccessAdmin, 'isAuthorized', isAuthorized);
-
   const logoutUser = () => {
     Cookies.remove('token');
-    setUser({ isAuthorized: false, userName: undefined, accountPermissions: undefined, id: undefined });
+    setUser({ accountActivated: false, userName: undefined, accountPermissions: undefined, id: undefined });
     navigate('/paskyra/prisijungti');
   };
 
@@ -84,7 +82,7 @@ const Menu = () => {
                 </Box>
 
                 <Box display="flex" alignItems="center" height={'100%'}>
-                  {isAuthorized ? (
+                  {accountActivated ? (
                     <Box display="flex" justifyItems="space-between" alignItems="center" marginRight="8px">
                       {!isMobile && <GreenDotBox />}
                       <Box marginRight="16px" sx={{ color: 'white' }}>
@@ -92,8 +90,10 @@ const Menu = () => {
                       </Box>
 
                       <Box marginRight="16px" sx={{ color: 'white', position: 'relative', cursor: 'pointer' }}>
-                        <Notifications sx={{ fill: 'white', cursor: 'pointer' }} onClick={handleNotifications} />
-                        {!!notificationCount && <NotificationCountBox>{notificationCount}</NotificationCountBox>}
+                        <Box onClick={handleNotifications}>
+                          <Notifications sx={{ fill: 'white', cursor: 'pointer' }} />
+                          {!!notificationCount && <NotificationCountBox>{notificationCount}</NotificationCountBox>}
+                        </Box>
                         {isNotificationOpen && (
                           <Box
                             display="flex"
