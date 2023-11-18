@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import i18next from 'i18next';
 import 'flag-icon-css/css/flag-icons.min.css';
 import { Box } from '@mui/material';

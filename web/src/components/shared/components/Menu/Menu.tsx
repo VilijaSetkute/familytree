@@ -19,8 +19,6 @@ import LanguageSelector from '../LanguageSelector/LanguageSelector';
 import { UserContext } from '../../../../utils/context/userContext';
 import Cookies from 'js-cookie';
 import Notification from './Notification';
-import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { SocketProp } from '../../models/websocketModel';
 
 interface Props {
@@ -45,7 +43,7 @@ const Menu: React.FC<Props> = ({ socket }) => {
         setMessages((prev) => [...prev, message]);
       });
     }
-  }, [socket]);
+  }, [socket]); // eslint-disable-line
 
   const logoutUser = () => {
     Cookies.remove('token');

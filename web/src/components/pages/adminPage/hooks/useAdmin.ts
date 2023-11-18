@@ -7,8 +7,6 @@ import {
   updateUsersPermission,
 } from '../../../shared/service/api/users.api';
 import { UserResponse } from '../../../shared/models/authorizationModel';
-import { Socket } from 'socket.io-client';
-import { DefaultEventsMap } from '@socket.io/component-emitter';
 import { SocketProp } from '../../../shared/models/websocketModel';
 
 export interface Option {
@@ -31,7 +29,7 @@ export const useAdmin = (socket: SocketProp) => {
 
   useEffect(() => {
     usersApi.call(getAllUsers());
-  }, []);
+  }, []); // eslint-disable-line
 
   const deleteUser = async (id: string) => {
     await manageApi.call(deleteSingleUser(id));
