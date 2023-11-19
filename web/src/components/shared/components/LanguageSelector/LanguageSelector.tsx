@@ -36,7 +36,7 @@ const LanguageSelector = () => {
 
   return (
     <ClickAwayListener onClickAway={() => setIsOpen(false)}>
-      <Box position="relative">
+      <Box position="relative" sx={{ zIndex: 99 }}>
         <Box display="flex" alignItems="center">
           <Box
             sx={{ cursor: 'pointer' }}

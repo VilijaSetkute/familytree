@@ -2,6 +2,7 @@ import { Box } from '@mui/material';
 import CustomButton from '../../shared/components/CustomButton';
 import { useTranslation } from 'react-i18next';
 import { styles, LandingTitle, CenteredContainer } from './styles';
+import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
   const { t } = useTranslation();
@@ -13,7 +14,9 @@ const LandingPage = () => {
 
         <LandingTitle sx={styles.landingTitle}>{t('landing_title.main_title')}</LandingTitle>
       </Box>
-      <CustomButton color="gradient" text={t('buttons.button_landing_start')} />
+      <Link to="/pagrindinis">
+        <CustomButton color="gradient" text={t('buttons.button_landing_start')} />
+      </Link>
     </CenteredContainer>
   );
 };

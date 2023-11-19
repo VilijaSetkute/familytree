@@ -8,5 +8,4 @@ export const ContentContainerPaper = styled(Paper)({
   margin: '0 auto',
   padding: '24px',
   color: colors.dark.main,
-  height: 'calc(100vh - 150px)',
 });

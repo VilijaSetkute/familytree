@@ -87,7 +87,7 @@ const Menu: React.FC<Props> = ({ socket }) => {
               </Box>
 
               <Box display="flex" alignItems="center">
-                <Box display="flex" alignItems="center">
+                <Box display="flex" alignItems="center" zIndex="999">
                   <MenuListContainer visiblemenu={`${isMenuVisible}`}>
                     <MenuCloseIcon onClick={() => setIsMenuVisible(false)} />
                     <StyledNavButton to="/pagrindinis" text={t('menu.home')} onClose={handleMenuItem} />

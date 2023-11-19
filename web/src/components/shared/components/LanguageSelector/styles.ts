@@ -21,4 +21,5 @@ export const LanguageItem = styled(Box)<{ isSelected: boolean }>(({ isSelected }
   },
   opacity: isSelected ? 0.5 : 1,
   filter: isSelected ? 'grayscale(100%)' : 'none',
+  boxShadow: '0 0 10px gray',
 }));

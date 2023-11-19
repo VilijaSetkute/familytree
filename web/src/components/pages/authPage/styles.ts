@@ -14,7 +14,7 @@ export const styles: StylesProps = {
 };
 
 export const CenteredContainer = styled(Box)({
-  height: 'calc(100vh - 280px)',
+  height: 'calc(100vh - 77px)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -23,14 +23,14 @@ export const CenteredContainer = styled(Box)({
 export const AuthCard = styled(Box)({
   display: 'flex',
   flexDirection: 'column',
-  maxWidth: '440px',
-  minWidth: '300px',
+  maxWidth: '400px',
   backgroundColor: colors.white,
   borderRadius: '16px',
   filter: 'drop-shadow(0px 15px 15px rgba(0, 0, 0, 0.75))',
   padding: '32px',
   textTransform: 'capitalize',
   fontWeight: 600,
+  margin: '16px',
 });
 
 export const InputField = styled(Input)({
